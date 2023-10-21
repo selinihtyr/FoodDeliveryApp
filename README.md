@@ -10,9 +10,7 @@ The Food Delivery App is a comprehensive mobile application designed to facilita
 - **Browse Foods**: View a wide range of food items right from the homepage.
 - **Detailed View**: Inspect the details of each food item, including ingredients, price, and more.
 - **Shopping Cart**: Add your favorite meals to the cart and manage your orders.
-- **Order Tracking**: With the integrated map, track your food's delivery in real-time.
-- **User Profile**: Manage your user details and preferences.
-
+  
 ## Architecture & Design Patterns
 
 ### MVVM Architecture
