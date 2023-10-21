@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "191625081697",
+    "project_id": "alien-handler-395908",
+    "storage_bucket": "alien-handler-395908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191625081697:android:66a2bce3e1c9b9e3208b20",
+        "android_client_info": {
+          "package_name": "com.selin.fooddeliveryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBTpF17s69dPDFgx-3bTBxUU0MRY_zGZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

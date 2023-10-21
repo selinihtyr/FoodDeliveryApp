@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Food Delivery</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="all_the_delicious_food_on_you_phone">All the delicious food on you phone</string>
+    <string name="if_you_re_hungry_start">If you\'re hungry, start.</string>
+    <string name="food_delivery">Food Delivery</string>
+
+
+</resources>
