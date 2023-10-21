@@ -1,8 +1,5 @@
 # FoodDeliveryApp
 
-![App Icon](https://github.com/selinihtyr/FoodDeliveryApp/blob/58c34f22b51398cd9f0ce47f8d6bb77570efb405/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-
-
 Preview video: https://drive.google.com/file/d/1_x2EG8wm2MIV4IQqoycAzKq05oAkCRwp/view?usp=share_link
 
 ## Overview
