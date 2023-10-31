@@ -20,30 +20,44 @@ class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private val viewModel: CartViewModel by viewModels()
     private lateinit var cartAdapter: CartAdapter
+    private var isCartSelected = false
+    private var isHomeSelected = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(inflater, container, false)
-        cartAdapter = CartAdapter(requireContext(), mutableListOf(), viewModel)  // Initialize adapter here
+        setupRecyclerView()
+        observeTotalPrice()
+        setClickListeners()
+        return binding.root
+    }
 
+    private fun setupRecyclerView() {
+        cartAdapter = CartAdapter(requireContext(), mutableListOf(), viewModel)
         binding.rvShoppingCart.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         binding.rvShoppingCart.adapter = cartAdapter
-        viewModel.mTotalPrice.observe(viewLifecycleOwner) { totalPrice ->
-            binding.tvTotal.text = "$totalPrice₺"
-        }
-        binding.btnConfirmCart.setOnClickListener {
-            if(viewModel.mTotalPrice.value == 0){
-                Toast.makeText(requireContext(), "Your cart is empty!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            Navigation.findNavController(it).navigate(R.id.transitationEnd)
-            Toast.makeText(requireContext(), "Order is confirmed!", Toast.LENGTH_SHORT).show()
-        }
+    }
 
+    private fun observeTotalPrice() {
         viewModel.foodsCartList.observe(viewLifecycleOwner) { cartItems ->
             cartAdapter.updateData(cartItems)
+        }
+
+        viewModel.mTotalPrice.observe(viewLifecycleOwner) { totalPrice ->
+            binding.tvTotal.text = getString(R.string.total_price, totalPrice)
+        }
+    }
+
+    private fun setClickListeners() {
+        binding.btnConfirmCart.setOnClickListener {
+            if (viewModel.mTotalPrice.value == 0) {
+                showToast(R.string.cart_empty)
+            } else {
+                navigateToTransitionEnd()
+                showToast(R.string.order_confirmed)
+            }
         }
 
         binding.ibBack.setOnClickListener {
@@ -51,31 +65,37 @@ class CartFragment : Fragment() {
         }
 
         binding.tbCart2.setOnClickListener {
-
-            Navigation.findNavController(it).navigate(R.id.cartFragment)
+            updateToggleButtonState(true, false)
+            navigateToFragment(R.id.cartFragment)
         }
+
         binding.tbHome2.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.homepageFragment)
+            updateToggleButtonState(false, true)
+            navigateToFragment(R.id.homepageFragment)
         }
-
-        return binding.root
     }
 
-    private var isCartSelected = false
-    private var isHomeSelected = false
+    private fun navigateToTransitionEnd() {
+        navigateToFragment(R.id.transitationEnd)
+    }
 
-    private fun updateToggleButtonState() {
-        if (isCartSelected) {
-            binding.tbCart2.setBackgroundResource(R.drawable.tbutton_background) // Seçilen arka plan rengi
-        } else {
-            binding.tbCart2.setBackgroundResource(R.drawable.tbutton_background) // Seçilmemiş arka plan rengi
-        }
+    private fun updateToggleButtonState(isCartSelected: Boolean, isHomeSelected: Boolean) {
+        this.isCartSelected = isCartSelected
+        this.isHomeSelected = isHomeSelected
+        updateButtonBackground(binding.tbCart2, isCartSelected)
+        updateButtonBackground(binding.tbHome2, isHomeSelected)
+    }
 
-        if (isHomeSelected) {
-            binding.tbHome2.setBackgroundResource(R.drawable.tbutton_background) // Seçilen arka plan rengi
-        } else {
-            binding.tbHome2.setBackgroundResource(R.drawable.tbutton_background) // Seçilmemiş arka plan rengi
-        }
+    private fun updateButtonBackground(view: View, isSelected: Boolean) {
+        view.setBackgroundResource(if (isSelected) R.drawable.tbutton_background else R.drawable.tbutton_background)
+    }
+
+    private fun showToast(message: Int) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToFragment(destination: Int) {
+        Navigation.findNavController(binding.btnConfirmCart).navigate(destination)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

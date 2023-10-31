@@ -2,7 +2,6 @@ package com.selin.fooddeliveryapp.ui.adapter
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -53,7 +52,7 @@ class HomepageAdapter(
     }
 
     private fun setupFoodInfo(card: CardDesignBinding, food: Foods) {
-        val priceText = context.getString(R.string.price_format, food.yemek_fiyat)
+        val priceText = context.getString(R.string.price, food.yemek_fiyat)
         card.tvPrice.text = priceText
     }
 

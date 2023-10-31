@@ -5,6 +5,10 @@
     <string name="all_the_delicious_food_on_you_phone">All the delicious food on you phone</string>
     <string name="if_you_re_hungry_start">If you\'re hungry, start.</string>
     <string name="food_delivery">Food Delivery</string>
-    <string name="price_format">%s₺</string>
+    <string name="price">%s₺</string>
+    <string name="food_name">%1$s</string>
+    <string name="cart_empty">Your cart is empty!</string>
+    <string name="order_confirmed">Order is confirmed!</string>
+    <string name="total_price">%d₺</string>
 
 </resources>
