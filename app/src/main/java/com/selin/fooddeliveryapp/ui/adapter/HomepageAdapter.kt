@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
@@ -16,18 +16,21 @@ import com.selin.fooddeliveryapp.databinding.CardDesignBinding
 import com.selin.fooddeliveryapp.retrofit.FoodsApi
 import com.selin.fooddeliveryapp.retrofit.RetrofitClient
 import com.selin.fooddeliveryapp.ui.viewModel.HomepageViewModel
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class HomepageAdapter(private val mContext:Context, private var foodsList: List<Foods>, val viewModel: HomepageViewModel)
-    : RecyclerView.Adapter<HomepageAdapter.CardDesignHolder>(){
+class HomepageAdapter(
+    private val context: Context,
+    private var foodsList: List<Foods>,
+    private val viewModel: HomepageViewModel) : RecyclerView.Adapter<HomepageAdapter.CardDesignHolder>(){
 
-    inner class CardDesignHolder(val design: CardDesignBinding) : RecyclerView.ViewHolder(design.root){
-    }
+    inner class CardDesignHolder(val binding: CardDesignBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesignHolder {
-        val binding = CardDesignBinding.inflate(LayoutInflater.from(mContext), parent, false)
+        val binding = CardDesignBinding.inflate(LayoutInflater.from(context), parent, false)
         return CardDesignHolder(binding)
     }
 
@@ -36,55 +39,70 @@ class HomepageAdapter(private val mContext:Context, private var foodsList: List<
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return foodsList.size
-    }
+    override fun getItemCount(): Int = foodsList.size
 
     override fun onBindViewHolder(holder: CardDesignHolder, position: Int) {
         val food = foodsList.get(position)
-        val f = holder.design
-        f.tvFoodName.text = food.yemek_adi
-        f.tvPrice.text = food.yemek_fiyat.toString() + "₺"
+        val card = holder.binding
 
-        f.ibAdd.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val response = RetrofitClient.getClient("http://kasimadalan.pe.hu/")
-                    .create(FoodsApi::class.java)
-                    .addFoodToCart(food.yemek_adi, food.yemek_resim_adi, food.yemek_fiyat.toInt(), 1, Username.username)
+        setupFoodInfo(card, food)
+        setAddToCartListener(card, food)
+        setDetailClickListener(card, food)
+        setLikeClickListener(card)
+        loadImage(context, food, card)
+    }
 
-                if (response.success == 1) {
-                    Log.d("AddToCart", "Item added to cart")
-                } else {
-                    Log.e("AddToCart", "Failed to add item to cart")
+    private fun setupFoodInfo(card: CardDesignBinding, food: Foods) {
+        val priceText = context.getString(R.string.price_format, food.yemek_fiyat)
+        card.tvPrice.text = priceText
+    }
+
+    private fun setAddToCartListener(card: CardDesignBinding, food: Foods) {
+        card.ibAdd.setOnClickListener {
+            addToCart(food)
+        }
+    }
+
+    private fun setDetailClickListener(card: CardDesignBinding, food: Foods) {
+        card.ivFood.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("yemek_adi", food.yemek_adi)
+                putString("yemek_fiyat", food.yemek_fiyat.toString())
+                putString("yemek_resim_adi", food.yemek_resim_adi)
+            }
+            it.findNavController().navigate(R.id.transitationDetail, bundle)
+        }
+    }
+
+    private fun setLikeClickListener(card: CardDesignBinding) {
+        var isLiked = false
+        card.ibLike.setOnClickListener {
+            isLiked = !isLiked
+            card.ibLike.setImageResource(if (isLiked) R.drawable.red_heart else R.drawable.like)
+        }
+    }
+
+    private fun loadImage(context: Context, food: Foods, card: CardDesignBinding) {
+        val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}"
+        Glide.with(context)
+            .load(imageUrl)
+            .override(300, 300)
+            .into(card.ivFood)
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun addToCart(food: Foods) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val response = RetrofitClient.getClient("http://kasimadalan.pe.hu/")
+                .create(FoodsApi::class.java)
+                .addFoodToCart(food.yemek_adi, food.yemek_resim_adi, food.yemek_fiyat.toInt(), 1, Username.username)
+
+            if (response.success == 1) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Item added to cart successfully", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
-            Toast.makeText(mContext, "Item added to cart successfuly", Toast.LENGTH_SHORT).show()
         }
-
-        f.ivFood.setOnClickListener {
-            val food = foodsList.get(position)
-
-            val bundle = Bundle()
-            bundle.putString("yemek_adi", food.yemek_adi)
-            bundle.putString("yemek_fiyat", food.yemek_fiyat)
-            bundle.putString("yemek_resim_adi", food.yemek_resim_adi)
-            Navigation.findNavController(it).navigate(R.id.transitationDetail, bundle)
-        }
-
-        var isLiked = false
-        f.ibLike.setOnClickListener {
-            if (isLiked) {
-                f.ibLike.setImageResource(R.drawable.like)
-            } else {
-                f.ibLike.setImageResource(R.drawable.red_heart)
-            }
-            isLiked = !isLiked
-        }
-
-        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}"
-        Glide.with(mContext)
-            .load(url)
-            .override(300, 300)
-            .into(f.ivFood)
     }
 }
