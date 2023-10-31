@@ -3,12 +3,11 @@ package com.selin.fooddeliveryapp.di
 import com.selin.fooddeliveryapp.data.dataSource.FoodsDataSource
 import com.selin.fooddeliveryapp.data.repo.FoodsRepo
 import com.selin.fooddeliveryapp.retrofit.ApiUtils
-import com.selin.fooddeliveryapp.retrofit.FoodsDao
+import com.selin.fooddeliveryapp.retrofit.FoodsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.http.FormUrlEncoded
 import javax.inject.Singleton
 
 @Module
@@ -22,13 +21,13 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideFoodDataSource(fdao: FoodsDao) : FoodsDataSource {
+    fun provideFoodDataSource(fdao: FoodsApi) : FoodsDataSource {
         return FoodsDataSource(fdao)
     }
 
     @Provides
     @Singleton
-    fun provideFoodDao() : FoodsDao {
+    fun provideFoodDao() : FoodsApi {
         return ApiUtils.getFoodsDao()
     }
 }

@@ -3,12 +3,12 @@ package com.selin.fooddeliveryapp.data.dataSource
 import android.util.Log
 import com.selin.fooddeliveryapp.data.entity.Foods
 import com.selin.fooddeliveryapp.data.entity.FoodsCart
-import com.selin.fooddeliveryapp.retrofit.FoodsDao
+import com.selin.fooddeliveryapp.retrofit.FoodsApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.EOFException
 
-class FoodsDataSource(var fdao: FoodsDao) {
+class FoodsDataSource(var fdao: FoodsApi) {
     suspend fun getAllFoods() : List<Foods> = withContext(Dispatchers.IO){
         return@withContext fdao.getAllFoods().foods
     }

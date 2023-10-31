@@ -4,13 +4,12 @@ import com.selin.fooddeliveryapp.data.entity.CRUDResponse
 import com.selin.fooddeliveryapp.data.entity.FoodsCartResponse
 import com.selin.fooddeliveryapp.data.entity.FoodsResponse
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface FoodsDao {
+interface FoodsApi {
     //http://kasimadalan.pe.hu/yemekler/tumYemekleriGetir.php
     //http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php
     //http://kasimadalan.pe.hu/yemekler/sepeteYemekEkle.php

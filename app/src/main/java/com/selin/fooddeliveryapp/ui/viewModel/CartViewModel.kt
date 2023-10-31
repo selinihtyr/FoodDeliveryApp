@@ -1,17 +1,12 @@
 package com.selin.fooddeliveryapp.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.selin.fooddeliveryapp.data.entity.Foods
 import com.selin.fooddeliveryapp.data.entity.FoodsCart
 import com.selin.fooddeliveryapp.data.entity.Username
 import com.selin.fooddeliveryapp.data.repo.FoodsRepo
-import com.selin.fooddeliveryapp.retrofit.FoodsDao
-import com.selin.fooddeliveryapp.retrofit.RetrofitClient
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
