@@ -26,7 +26,7 @@
             android:src="@drawable/like" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewFoodİmage"
+            android:id="@+id/cardViewFoodImage"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="center|top"
@@ -35,7 +35,7 @@
             app:cardElevation="2dp">
 
             <ImageView
-                android:id="@+id/ivFood"
+                android:id="@+id/ivFoodImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/ic_launcher_background" />
@@ -78,7 +78,7 @@
             app:srcCompat="@drawable/add" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivDelivery"
             android:layout_width="30dp"
             android:layout_height="31dp"
             android:layout_marginLeft="45dp"
@@ -86,7 +86,7 @@
             app:srcCompat="@drawable/delivery" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvFreeShipping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"

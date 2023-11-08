@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0C000000"
-    tools:context=".ui.fragment.CartFragment">
+    tools:context=".ui.cart.CartFragment">
 
     <ToggleButton
-        android:id="@+id/tbCart2"
+        android:id="@+id/tbCartCart"
         android:layout_width="54dp"
         android:layout_height="46dp"
         android:layout_marginEnd="90dp"
@@ -22,10 +22,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tbHome2" />
+        app:layout_constraintStart_toEndOf="@+id/tbHomeCart" />
 
     <ToggleButton
-        android:id="@+id/tbHome2"
+        android:id="@+id/tbHomeCart"
         android:layout_width="45dp"
         android:layout_height="43dp"
         android:layout_marginStart="90dp"
@@ -37,7 +37,7 @@
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tbCart2"
+        app:layout_constraintEnd_toStartOf="@+id/tbCartCart"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
@@ -74,7 +74,7 @@
         android:layout_marginBottom="8dp"
         android:text="Confirm cart"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tbHome2"
+        app:layout_constraintBottom_toTopOf="@+id/tbHomeCart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -88,10 +88,10 @@
         android:paddingBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCart" />
 
     <TextView
-        android:id="@+id/textViewTotal"
+        android:id="@+id/tvTotalCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rvShoppingCart" />
 
     <TextView
-        android:id="@+id/tvTotal"
+        android:id="@+id/tvTotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"

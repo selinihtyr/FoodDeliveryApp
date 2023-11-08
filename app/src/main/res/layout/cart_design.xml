@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -14,7 +13,7 @@
         app:cardCornerRadius="15dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewCart"
+            android:id="@+id/cardViewCartImage"
             android:layout_width="wrap_content"
             android:layout_height="130dp"
             android:layout_gravity="center|left"
@@ -25,7 +24,7 @@
             app:cardMaxElevation="0dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewFoodİmage"
+                android:id="@+id/cardViewFoodImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
@@ -33,7 +32,7 @@
                 app:cardElevation="2dp">
 
                 <ImageView
-                    android:id="@+id/ivFood"
+                    android:id="@+id/ivFoodImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/ic_launcher_background" />

@@ -8,7 +8,7 @@
     tools:context=".ui.fragment.EndFragment">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView3"
+        android:id="@+id/avEnd"
         android:layout_width="348dp"
         android:layout_height="303dp"
         android:layout_marginTop="248dp"
@@ -23,14 +23,14 @@
         app:lottie_rawRes="@raw/animation_lnzq9ve8" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tvYourOrderReceived"
         android:layout_width="394dp"
         android:layout_height="58dp"
         android:text="Your order received!!"
         android:textAlignment="center"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/animationView3"
+        app:layout_constraintBottom_toTopOf="@+id/avEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

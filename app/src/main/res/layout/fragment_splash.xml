@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
+        android:id="@+id/avSplashFood"
         android:layout_width="266dp"
         android:layout_height="241dp"
         android:layout_marginTop="48dp"
@@ -23,7 +23,7 @@
         app:lottie_rawRes="@raw/animation_lnhmlbrh" />
 
     <TextView
-        android:id="@+id/tbDecriptionTitle"
+        android:id="@+id/tvFoodDelivery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -33,10 +33,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/animationView" />
+        app:layout_constraintTop_toBottomOf="@+id/avSplashFood" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbDecriptionTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFoodDelivery" />
 
     <TextView
         android:id="@+id/textView3"
@@ -59,10 +59,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView2"
+        android:id="@+id/avSplashLoading"
         android:layout_width="265dp"
         android:layout_height="107dp"
         android:layout_marginTop="16dp"

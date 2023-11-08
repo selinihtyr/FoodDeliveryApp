@@ -1,17 +1,17 @@
 package com.selin.fooddeliveryapp.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.entity.Username
 import com.selin.fooddeliveryapp.databinding.FragmentDetailBinding
-import com.selin.fooddeliveryapp.ui.viewModel.CartViewModel
+import com.selin.fooddeliveryapp.ui.cart.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,14 +22,19 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
-        initializeViews()
-        setListeners()
         return binding.root
     }
 
-    private fun initializeViews() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        //initializeViews()
+        setListeners()
+    }
+
+    private fun initViews() {
         val foodName = arguments?.getString("yemek_adi")
         val foodPrice = arguments?.getString("yemek_fiyat")
         val foodImage = arguments?.getString("yemek_resim_adi")
@@ -42,18 +47,20 @@ class DetailFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.chipMinus.setOnClickListener { updateQuantity(-1) }
-        binding.chipPlus.setOnClickListener { updateQuantity(1) }
-        binding.chipAddCart.setOnClickListener { addToCart() }
-        binding.tbCart3.setOnClickListener { navigateToCartFragment() }
-        binding.tbHome3.setOnClickListener { navigateToHomeFragment() }
-        binding.ivBack.setOnClickListener { navigateBack() }
+        binding.apply {
+            chipMinus.setOnClickListener { updateQuantity(-1) }
+            chipPlus.setOnClickListener { updateQuantity(1) }
+            chipAddCart.setOnClickListener { addToCart() }
+            tbCartDetail.setOnClickListener { navigateToCartFragment() }
+            tbHomeDetail.setOnClickListener { navigateToHomeFragment() }
+            ivBack.setOnClickListener { navigateBack() }
+        }
     }
 
     private fun loadImage(imageUrl: String) {
         Glide.with(this)
             .load(imageUrl)
-            .into(binding.ivFood)
+            .into(binding.ivFoodImage)
     }
 
     private fun displayFoodDetails(name: String, price: String) {
@@ -81,15 +88,17 @@ class DetailFragment : Fragment() {
 
         viewModel.addFoodToCart(foodName!!, foodImage!!, foodPrice, quantity, username)
 
-        Navigation.findNavController(binding.chipAddCart).navigate(R.id.detailFragment_to_cartFragment)
+        Navigation.findNavController(binding.chipAddCart)
+            .navigate(R.id.detailFragment_to_cartFragment)
     }
 
     private fun navigateToCartFragment() {
-        Navigation.findNavController(binding.chipAddCart).navigate(R.id.detailFragment_to_cartFragment)
+        Navigation.findNavController(binding.chipAddCart)
+            .navigate(R.id.detailFragment_to_cartFragment)
     }
 
     private fun navigateToHomeFragment() {
-        Navigation.findNavController(binding.tbHome3).navigate(R.id.homepageFragment)
+        Navigation.findNavController(binding.tbHomeDetail).navigate(R.id.homepageFragment)
     }
 
     private fun navigateBack() {

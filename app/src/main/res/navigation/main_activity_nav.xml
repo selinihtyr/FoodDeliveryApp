@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homepageFragment"
-        android:name="com.selin.fooddeliveryapp.ui.fragment.HomepageFragment"
+        android:name="com.selin.fooddeliveryapp.ui.home.HomePageFragment"
         android:label="fragment_homepage"
         tools:layout="@layout/fragment_homepage" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.selin.fooddeliveryapp.ui.fragment.CartFragment"
+        android:name="com.selin.fooddeliveryapp.ui.cart.CartFragment"
         android:label="CartFragment" >
         <action
             android:id="@+id/transitationEnd"
