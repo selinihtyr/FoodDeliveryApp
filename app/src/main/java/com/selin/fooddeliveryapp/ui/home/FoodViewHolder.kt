@@ -5,18 +5,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.entity.Food
-import com.selin.fooddeliveryapp.databinding.CardDesignBinding
+import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodViewHolder(
-    val binding: CardDesignBinding,
+    val binding: ItemViewHomeCardBinding,
     private val foodCallbacks: FoodAdapter.FoodCallback,
     private var isFavorite: Boolean = false
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(food: Food) {
         val context = binding.root.context
-        binding.tvFoodName.text = food.foodName
-        setupFoodInfo(context = context, foodPrice = food.foodPrice)
+        binding.tvFoodName.text = food.name
+        setupFoodInfo(context = context, foodPrice = food.price)
         setAddToCartListener(food)
         setDetailClickListener(food)
         setLikeClickListener(food)
@@ -53,7 +53,7 @@ class FoodViewHolder(
     }
 
     private fun loadImage(context: Context, food: Food) {
-        val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.foodImageName}"
+        val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.imageName}"
         Glide.with(context)
             .load(imageUrl)
             .override(300, 300)

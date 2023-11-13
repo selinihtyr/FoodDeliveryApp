@@ -29,23 +29,23 @@ interface FoodApi {
     @POST("yemekler/sepeteYemekEkle.php")
     @FormUrlEncoded
     suspend fun addFoodToCart(
-        @Field("yemek_adi") yemek_adi: String,
-        @Field("yemek_resim_adi") yemek_resim_adi: String,
-        @Field("yemek_fiyat") yemek_fiyat: Int,
-        @Field("yemek_siparis_adet") yemek_siparis_adet: Int,
-        @Field("kullanici_adi") kullanici_adi: String
+        @Field("yemek_adi") foodName: String,
+        @Field("yemek_resim_adi") foodImageName: String,
+        @Field("yemek_fiyat") foodPrice: Int,
+        @Field("yemek_siparis_adet") foodOrderQuantity: Int,
+        @Field("kullanici_adi") username: String
     ): CRUDResponse
 
     @POST("yemekler/sepettekiYemekleriGetir.php")
     @FormUrlEncoded
-    fun getCartFoods(@Field("kullanici_adi") kullanici_adi: String): Call<FoodCartResponse>
+    fun getCartFoods(@Field("kullanici_adi") username: String): Call<FoodCartResponse>
 
 
     @POST("yemekler/sepettenYemekSil.php")
     @FormUrlEncoded
     suspend fun deleteFoodFromCart(
-        @Field("sepet_yemek_id") sepet_yemek_id: Int,
-        @Field("kullanici_adi") kullanici_adi: String
+        @Field("sepet_yemek_id") cartFoodId: Int,
+        @Field("kullanici_adi") username: String
     ): CRUDResponse
 
 }

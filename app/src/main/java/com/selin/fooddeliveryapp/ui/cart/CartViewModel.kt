@@ -8,6 +8,7 @@ import com.selin.fooddeliveryapp.data.entity.Username
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,7 +26,7 @@ class CartViewModel @Inject constructor(
 
             var totalPrice = 0
             for (cartItem in cartList) {
-                totalPrice += cartItem.foodPrice * cartItem.foodOrderQuantity
+                totalPrice += cartItem.cartFoodPrice * cartItem.cartFoodOrderQuantity
             }
 
             foodsCartList.postValue(cartList)
@@ -51,11 +52,10 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    fun delete(sepet_yemek_id: Int, kullanici_adi: String, callback: () -> Unit) {
+    fun delete(cartFoodId: Int, username: String, callback: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            foodRepo.deleteFoodFromCart(sepet_yemek_id, kullanici_adi)
+            foodRepo.deleteFoodFromCart(cartFoodId, username)
             callback()
-
         }
     }
 }

@@ -44,7 +44,7 @@ class HomePageFragment : Fragment() {
 
     private fun initVariables() {
         foodAdapter = FoodAdapter(
-            foodsList = mutableListOf(),
+            foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
                 override fun onClickFavoriteButton(food: Food) {
 
@@ -52,9 +52,9 @@ class HomePageFragment : Fragment() {
 
                 override fun onClickDetail(food: Food) {
                     val bundle = Bundle().apply {
-                        putString("yemek_adi", food.foodName)
-                        putString("yemek_fiyat", food.foodPrice)
-                        putString("yemek_resim_adi", food.foodImageName)
+                        putString("yemek_adi", food.name)
+                        putString("yemek_fiyat", food.price)
+                        putString("yemek_resim_adi", food.imageName)
                     }
                     findNavController().navigate(R.id.transitationDetail, bundle)
                 }
@@ -81,9 +81,9 @@ class HomePageFragment : Fragment() {
             }
         })
 
-        rvHomeCardDesign.layoutManager =
+        rvHome.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
-        rvHomeCardDesign.adapter = foodAdapter
+        rvHome.adapter = foodAdapter
     }
 
     private fun observe() {

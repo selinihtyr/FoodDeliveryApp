@@ -28,6 +28,6 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFoodDao(): FoodApi {
-        return ApiUtils.getFoodsDao()
+        return ApiUtils.getFoodsApi()
     }
 }

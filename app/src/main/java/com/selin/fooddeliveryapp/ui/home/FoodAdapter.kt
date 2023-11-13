@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.selin.fooddeliveryapp.data.entity.Food
-import com.selin.fooddeliveryapp.databinding.CardDesignBinding
+import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodAdapter(
-    private var foodsList: List<Food>,
+    private var foods: List<Food>,
     private val foodCallbacks: FoodCallback
 ) : RecyclerView.Adapter<FoodViewHolder>() {
 
@@ -18,19 +18,19 @@ class FoodAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
-        val binding = CardDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemViewHomeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FoodViewHolder(binding, foodCallbacks)
     }
 
     fun updateData(newData: List<Food>) {
-        foodsList = newData
+        foods = newData
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = foodsList.size
+    override fun getItemCount(): Int = foods.size
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        val food = foodsList[position]
+        val food = foods[position]
         holder.bind(food)
     }
 }

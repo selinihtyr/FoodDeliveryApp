@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.selin.fooddeliveryapp.data.entity.FoodCart
-import com.selin.fooddeliveryapp.databinding.CartDesignBinding
+import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartAdapter(
     private var cartList: List<FoodCart>,
@@ -16,7 +16,7 @@ class CartAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val binding = CartDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemViewCartCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CartViewHolder(binding, cartCallback)
     }
 
@@ -42,7 +42,7 @@ class CartAdapter(
                             .setAction("Yes") {
                                 deleteFromCart(cart, position)
                             }.show()
-                    }*/
+         }*/
     }
 }
 

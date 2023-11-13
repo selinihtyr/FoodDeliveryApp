@@ -4,20 +4,20 @@ import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.data.entity.FoodCart
-import com.selin.fooddeliveryapp.databinding.CartDesignBinding
+import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartViewHolder(
-    val binding: CartDesignBinding,
+    val binding: ItemViewCartCardBinding,
     private val cartCallback: CartAdapter.CartCallback
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(cart: FoodCart) {
         val context = binding.root.context
         val card = binding
-        card.tvFoodName.text = cart.foodName
-        card.tvQuantity.text = cart.foodOrderQuantity.toString()
-        val tbPrice = cart.foodPrice
-        val totalPrice = cart.foodOrderQuantity * tbPrice
+        card.tvFoodName.text = cart.cartFoodName
+        card.tvQuantity.text = cart.cartFoodOrderQuantity.toString()
+        val tbPrice = cart.cartFoodPrice
+        val totalPrice = cart.cartFoodOrderQuantity * tbPrice
         card.tvPrice.text = "${totalPrice}₺"
 
         card.ibTrash.setOnClickListener {
@@ -28,7 +28,7 @@ class CartViewHolder(
     }
 
     private fun loadImage(context: Context, cart: FoodCart) {
-        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${cart.foodImageName}"
+        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${cart.cartImageName}"
         Glide.with(context)
             .load(url)
             .override(300, 300)

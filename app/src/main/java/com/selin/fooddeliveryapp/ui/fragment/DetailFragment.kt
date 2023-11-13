@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.entity.Username
@@ -30,8 +30,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        //initializeViews()
-        setListeners()
+        observe()
     }
 
     private fun initViews() {
@@ -46,7 +45,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun setListeners() {
+    private fun observe() {
         binding.apply {
             chipMinus.setOnClickListener { updateQuantity(-1) }
             chipPlus.setOnClickListener { updateQuantity(1) }
@@ -88,20 +87,18 @@ class DetailFragment : Fragment() {
 
         viewModel.addFoodToCart(foodName!!, foodImage!!, foodPrice, quantity, username)
 
-        Navigation.findNavController(binding.chipAddCart)
-            .navigate(R.id.detailFragment_to_cartFragment)
+        findNavController().navigate(R.id.detailFragment_to_cartFragment)
     }
 
     private fun navigateToCartFragment() {
-        Navigation.findNavController(binding.chipAddCart)
-            .navigate(R.id.detailFragment_to_cartFragment)
+        findNavController().navigate(R.id.detailFragment_to_cartFragment)
     }
 
     private fun navigateToHomeFragment() {
-        Navigation.findNavController(binding.tbHomeDetail).navigate(R.id.homepageFragment)
+        findNavController().navigate(R.id.homepageFragment)
     }
 
     private fun navigateBack() {
-        view?.let { Navigation.findNavController(it).popBackStack() }
+        view?.let { findNavController().popBackStack() }
     }
 }

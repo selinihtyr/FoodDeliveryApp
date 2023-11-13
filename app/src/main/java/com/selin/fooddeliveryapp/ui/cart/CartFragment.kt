@@ -58,7 +58,6 @@ class CartFragment : Fragment() {
                 showToast(R.string.cart_empty)
             } else {
                 navigateToTransitionEnd()
-                showToast(R.string.order_confirmed)
             }
         }
 
@@ -76,9 +75,9 @@ class CartFragment : Fragment() {
             navigateToFragment(R.id.homepageFragment)
         }
 
-        rvShoppingCart.layoutManager =
+        rvCart.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        rvShoppingCart.adapter = cartAdapter
+        rvCart.adapter = cartAdapter
     }
 
     private fun observe() {

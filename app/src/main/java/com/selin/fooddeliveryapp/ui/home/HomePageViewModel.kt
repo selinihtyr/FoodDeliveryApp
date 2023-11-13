@@ -21,7 +21,6 @@ class HomePageViewModel @Inject constructor(
     private val foodsList = MutableLiveData<List<Food>>()
     val filteredFoods = MutableLiveData<List<Food>>()
     val showMessage = MutableSharedFlow<String>()
-    private var isFavorite = false
 
     init {
         getAllFoods()
@@ -43,9 +42,9 @@ class HomePageViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val response = foodApi
                 .addFoodToCart(
-                    food.foodName,
-                    food.foodImageName,
-                    food.foodPrice.toInt(),
+                    food.name,
+                    food.imageName,
+                    food.price.toInt(),
                     1,
                     Username.username
                 )
@@ -58,7 +57,7 @@ class HomePageViewModel @Inject constructor(
     fun searchFoods(query: String) {
         val allFoods = foodsList.value ?: emptyList()
         val filteredResults = allFoods.filter { food ->
-            food.foodName.contains(query, ignoreCase = true)
+            food.name.contains(query, ignoreCase = true)
         }
         filteredFoods.value = filteredResults
     }

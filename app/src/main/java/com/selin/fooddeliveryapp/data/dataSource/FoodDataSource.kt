@@ -7,9 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.EOFException
 
-class FoodDataSource(private val foodName: FoodApi) {
+class FoodDataSource(private val api: FoodApi) {
     suspend fun getAllFoods(): List<Food> = withContext(Dispatchers.IO) {
-        return@withContext foodName.getAllFoods().foods
+        return@withContext api.getAllFoods().foods
     }
 
     suspend fun addFoodToCart(
@@ -19,7 +19,7 @@ class FoodDataSource(private val foodName: FoodApi) {
         foodOrderQuantity: Int,
         username: String
     ) {
-        val answer = this.foodName.addFoodToCart(
+        val answer = this.api.addFoodToCart(
             foodName,
             foodImageName,
             foodPrice,
@@ -30,21 +30,19 @@ class FoodDataSource(private val foodName: FoodApi) {
 
     suspend fun getCartFoods(username: String): List<FoodCart> = withContext(Dispatchers.IO) {
         try {
-            val call = foodName.getCartFoods(username)
+            val call = api.getCartFoods(username)
             val response = call.execute()
             if (response.isSuccessful && response.body() != null) {
                 return@withContext response.body()!!.foods
             } else {
                 return@withContext emptyList()
             }
-        } catch (e: EOFException) {
-            return@withContext emptyList()
         } catch (e: Exception) {
             return@withContext emptyList()
         }
     }
 
     suspend fun deleteFoodFromCart(cartFoodId: Int, username: String) {
-        val answer = foodName.deleteFoodFromCart(cartFoodId, username)
+        val answer = api.deleteFoodFromCart(cartFoodId, username)
     }
 }

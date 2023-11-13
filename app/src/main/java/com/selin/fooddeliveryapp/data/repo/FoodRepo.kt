@@ -4,8 +4,8 @@ import com.selin.fooddeliveryapp.data.dataSource.FoodDataSource
 import com.selin.fooddeliveryapp.data.entity.Food
 import com.selin.fooddeliveryapp.data.entity.FoodCart
 
-class FoodRepo(private val foodDataSource: FoodDataSource) {
-    suspend fun getAllFoods(): List<Food> = foodDataSource.getAllFoods()
+class FoodRepo(private val dataSource: FoodDataSource) {
+    suspend fun getAllFoods(): List<Food> = dataSource.getAllFoods()
 
     suspend fun addFoodToCart(
         foodName: String,
@@ -13,7 +13,7 @@ class FoodRepo(private val foodDataSource: FoodDataSource) {
         foodPrice: Int,
         foodOrderQuantity: Int,
         username: String
-    ) = foodDataSource.addFoodToCart(
+    ) = dataSource.addFoodToCart(
         foodName,
         foodPrice,
         foodImageName,
@@ -21,11 +21,11 @@ class FoodRepo(private val foodDataSource: FoodDataSource) {
         username
     )
 
-    suspend fun getCartFoods(kullanici_adi: String): List<FoodCart> =
-        foodDataSource.getCartFoods(kullanici_adi)
+    suspend fun getCartFoods(username: String): List<FoodCart> =
+        dataSource.getCartFoods(username)
 
-    suspend fun deleteFoodFromCart(sepet_yemek_id: Int, kullanici_adi: String) =
-        foodDataSource.deleteFoodFromCart(sepet_yemek_id, kullanici_adi)
+    suspend fun deleteFoodFromCart(cartFoodId: Int, username: String) =
+        dataSource.deleteFoodFromCart(cartFoodId, username)
 
 
 }
