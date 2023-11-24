@@ -46,7 +46,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         tbHomeMap.setOnClickListener {
             isHomeSelected = !isHomeSelected
             updateToggleButtonState(button = tbHomeMap, isSelected = isHomeSelected)
-            goBackToPreviousFragment()
+            activity?.supportFragmentManager?.popBackStack()
         }
     }
 
@@ -63,10 +63,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val zoomLevel = 14f
         mMap.addMarker(MarkerOptions().position(location).title("Metropol İstanbul"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
-    }
-
-    private fun goBackToPreviousFragment() {
-        activity?.supportFragmentManager?.popBackStack()
     }
 
     private fun updateToggleButtonState(button: Button, isSelected: Boolean) {

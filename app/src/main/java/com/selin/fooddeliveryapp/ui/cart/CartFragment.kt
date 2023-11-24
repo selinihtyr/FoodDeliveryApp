@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.entity.FoodCart
@@ -55,9 +56,13 @@ class CartFragment : Fragment() {
     private fun initViews() = with(binding) {
         btnConfirmCart.setOnClickListener {
             if (viewModel.totalPrice.value == 0) {
-                showToast(R.string.cart_empty)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.cart_empty),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                navigateToTransitionEnd()
+                findNavController().navigate(R.id.transitationEnd)
             }
         }
 
@@ -92,10 +97,6 @@ class CartFragment : Fragment() {
         viewModel.updateCart()
     }
 
-    private fun navigateToTransitionEnd() {
-        navigateToFragment(R.id.transitationEnd)
-    }
-
     private fun updateToggleButtonState(isCartSelected: Boolean, isHomeSelected: Boolean) {
         this.isCartSelected = isCartSelected
         this.isHomeSelected = isHomeSelected
@@ -105,10 +106,6 @@ class CartFragment : Fragment() {
 
     private fun updateButtonBackground(view: View, isSelected: Boolean) {
         view.setBackgroundResource(if (isSelected) R.drawable.tbutton_background else R.drawable.tbutton_background)
-    }
-
-    private fun showToast(message: Int) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateToFragment(destination: Int) {

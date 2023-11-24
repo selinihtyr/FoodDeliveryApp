@@ -50,9 +50,9 @@ class DetailFragment : Fragment() {
             chipMinus.setOnClickListener { updateQuantity(-1) }
             chipPlus.setOnClickListener { updateQuantity(1) }
             chipAddCart.setOnClickListener { addToCart() }
-            tbCartDetail.setOnClickListener { navigateToCartFragment() }
-            tbHomeDetail.setOnClickListener { navigateToHomeFragment() }
-            ivBack.setOnClickListener { navigateBack() }
+            tbCartDetail.setOnClickListener { findNavController().navigate(R.id.detailFragment_to_cartFragment) }
+            tbHomeDetail.setOnClickListener { findNavController().navigate(R.id.homepageFragment) }
+            ivBack.setOnClickListener { view?.let { findNavController().popBackStack() } }
         }
     }
 
@@ -88,17 +88,5 @@ class DetailFragment : Fragment() {
         viewModel.addFoodToCart(foodName!!, foodImage!!, foodPrice, quantity, username)
 
         findNavController().navigate(R.id.detailFragment_to_cartFragment)
-    }
-
-    private fun navigateToCartFragment() {
-        findNavController().navigate(R.id.detailFragment_to_cartFragment)
-    }
-
-    private fun navigateToHomeFragment() {
-        findNavController().navigate(R.id.homepageFragment)
-    }
-
-    private fun navigateBack() {
-        view?.let { findNavController().popBackStack() }
     }
 }
