@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.ui.fragment
+package com.selin.fooddeliveryapp.ui.end
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.selin.fooddeliveryapp.databinding.FragmentEndBinding
 
 class EndFragment : Fragment() {
     private lateinit var binding: FragmentEndBinding
+    private val viewModel: EndViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,7 +23,11 @@ class EndFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler().postDelayed({
-        }, 5000)
+        viewModel.startAnimation{
+            Handler().postDelayed({
+                activity?.finish()
+            }, 10000)
+        }
+
     }
 }

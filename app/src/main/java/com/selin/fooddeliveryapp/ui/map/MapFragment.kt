@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.ui.fragment
+package com.selin.fooddeliveryapp.ui.map
 
 import android.os.Bundle
 import android.view.LayoutInflater

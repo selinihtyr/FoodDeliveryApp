@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.selin.fooddeliveryapp.ui.fragment.SplashFragment"
+        android:name="com.selin.fooddeliveryapp.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.selin.fooddeliveryapp.ui.fragment.MapFragment"
+        android:name="com.selin.fooddeliveryapp.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/endFragment"
-        android:name="com.selin.fooddeliveryapp.ui.fragment.EndFragment"
+        android:name="com.selin.fooddeliveryapp.ui.end.EndFragment"
         android:label="fragment_end"
         tools:layout="@layout/fragment_end" />
 </navigation>
