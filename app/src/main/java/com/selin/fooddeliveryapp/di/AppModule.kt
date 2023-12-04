@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.di
 import com.selin.fooddeliveryapp.data.dataSource.FoodDataSource
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import com.selin.fooddeliveryapp.retrofit.ApiUtils
-import com.selin.fooddeliveryapp.retrofit.FoodApi
+import com.selin.fooddeliveryapp.data.remote.FoodApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.entity.Food
+import com.selin.fooddeliveryapp.data.model.remote.Food
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

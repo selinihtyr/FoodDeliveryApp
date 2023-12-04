@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.ui.cart
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.selin.fooddeliveryapp.data.entity.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.FoodCart
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartViewHolder(

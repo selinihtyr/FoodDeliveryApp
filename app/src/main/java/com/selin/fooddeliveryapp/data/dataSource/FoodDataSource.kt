@@ -1,11 +1,10 @@
 package com.selin.fooddeliveryapp.data.dataSource
 
-import com.selin.fooddeliveryapp.data.entity.Food
-import com.selin.fooddeliveryapp.data.entity.FoodCart
-import com.selin.fooddeliveryapp.retrofit.FoodApi
+import com.selin.fooddeliveryapp.data.model.remote.Food
+import com.selin.fooddeliveryapp.data.model.remote.FoodCart
+import com.selin.fooddeliveryapp.data.remote.FoodApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.EOFException
 
 class FoodDataSource(private val api: FoodApi) {
     suspend fun getAllFoods(): List<Food> = withContext(Dispatchers.IO) {

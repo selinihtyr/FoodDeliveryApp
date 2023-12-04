@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.data.entity
+package com.selin.fooddeliveryapp.data.model.local
 
 class Username {
     companion object {

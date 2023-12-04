@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.ui.cart
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.selin.fooddeliveryapp.data.entity.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.FoodCart
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartAdapter(

@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.selin.fooddeliveryapp.data.entity.Food
+import com.selin.fooddeliveryapp.data.model.remote.Food
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodAdapter(

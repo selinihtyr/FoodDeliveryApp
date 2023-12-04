@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.entity.Food
+import com.selin.fooddeliveryapp.data.model.remote.Food
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodViewHolder(

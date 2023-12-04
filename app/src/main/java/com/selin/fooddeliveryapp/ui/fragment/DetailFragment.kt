@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.entity.Username
+import com.selin.fooddeliveryapp.data.model.local.Username
 import com.selin.fooddeliveryapp.databinding.FragmentDetailBinding
 import com.selin.fooddeliveryapp.ui.cart.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint

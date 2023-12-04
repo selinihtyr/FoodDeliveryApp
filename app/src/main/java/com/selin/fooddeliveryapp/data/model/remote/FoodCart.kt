@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.data.entity
+package com.selin.fooddeliveryapp.data.model.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

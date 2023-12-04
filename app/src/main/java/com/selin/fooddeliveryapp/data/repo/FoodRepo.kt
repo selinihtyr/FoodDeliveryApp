@@ -1,8 +1,8 @@
 package com.selin.fooddeliveryapp.data.repo
 
 import com.selin.fooddeliveryapp.data.dataSource.FoodDataSource
-import com.selin.fooddeliveryapp.data.entity.Food
-import com.selin.fooddeliveryapp.data.entity.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.Food
+import com.selin.fooddeliveryapp.data.model.remote.FoodCart
 
 class FoodRepo(private val dataSource: FoodDataSource) {
     suspend fun getAllFoods(): List<Food> = dataSource.getAllFoods()

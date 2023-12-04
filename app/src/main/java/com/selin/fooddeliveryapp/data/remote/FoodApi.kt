@@ -1,8 +1,8 @@
-package com.selin.fooddeliveryapp.retrofit
+package com.selin.fooddeliveryapp.data.remote
 
-import com.selin.fooddeliveryapp.data.entity.CRUDResponse
-import com.selin.fooddeliveryapp.data.entity.FoodCartResponse
-import com.selin.fooddeliveryapp.data.entity.FoodResponse
+import com.selin.fooddeliveryapp.data.model.response.CRUDResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

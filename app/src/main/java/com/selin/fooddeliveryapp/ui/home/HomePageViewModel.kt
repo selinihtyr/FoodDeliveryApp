@@ -3,10 +3,10 @@ package com.selin.fooddeliveryapp.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.selin.fooddeliveryapp.data.entity.Food
-import com.selin.fooddeliveryapp.data.entity.Username
+import com.selin.fooddeliveryapp.data.model.remote.Food
+import com.selin.fooddeliveryapp.data.model.local.Username
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
-import com.selin.fooddeliveryapp.retrofit.FoodApi
+import com.selin.fooddeliveryapp.data.remote.FoodApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
