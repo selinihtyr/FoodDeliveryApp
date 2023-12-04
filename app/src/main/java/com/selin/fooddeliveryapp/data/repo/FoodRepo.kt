@@ -8,16 +8,16 @@ class FoodRepo(private val dataSource: FoodDataSource) {
     suspend fun getAllFoods(): List<Food> = dataSource.getAllFoods()
 
     suspend fun addFoodToCart(
-        foodName: String,
-        foodImageName: String,
-        foodPrice: Int,
-        foodOrderQuantity: Int,
+        name: String,
+        imageName: String,
+        price: Int,
+        orderQuantity: Int,
         username: String
     ) = dataSource.addFoodToCart(
-        foodName,
-        foodPrice,
-        foodImageName,
-        foodOrderQuantity,
+        name,
+        price,
+        imageName,
+        orderQuantity,
         username
     )
 

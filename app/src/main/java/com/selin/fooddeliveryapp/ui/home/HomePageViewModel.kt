@@ -15,10 +15,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomePageViewModel @Inject constructor(
-    private val foodRepo: FoodRepo,
-    private val foodApi: FoodApi
+    private val repository: FoodRepo,
+    private val api: FoodApi
 ) : ViewModel() {
-    private val foodsList = MutableLiveData<List<Food>>()
+    private val list = MutableLiveData<List<Food>>()
     val filteredFoods = MutableLiveData<List<Food>>()
     val showMessage = MutableSharedFlow<String>()
 
@@ -29,8 +29,8 @@ class HomePageViewModel @Inject constructor(
     private fun getAllFoods() {
         viewModelScope.launch {
             try {
-                val allFoods = foodRepo.getAllFoods()
-                foodsList.value = allFoods
+                val allFoods = repository.getAllFoods()
+                list.value = allFoods
                 filteredFoods.value = allFoods
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -40,7 +40,7 @@ class HomePageViewModel @Inject constructor(
 
     fun addToCart(food: Food) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = foodApi
+            val response = api
                 .addFoodToCart(
                     food.name,
                     food.imageName,
@@ -55,7 +55,7 @@ class HomePageViewModel @Inject constructor(
     }
 
     fun searchFoods(query: String) {
-        val allFoods = foodsList.value ?: emptyList()
+        val allFoods = list.value ?: emptyList()
         val filteredResults = allFoods.filter { food ->
             food.name.contains(query, ignoreCase = true)
         }

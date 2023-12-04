@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomePageFragment : Fragment() {
     private lateinit var binding: FragmentHomepageBinding
-    private lateinit var foodAdapter: FoodAdapter
+    private lateinit var adapter: FoodAdapter
     private var isCartSelected = false
     private var isHomeSelected = false
     private val viewModel: HomePageViewModel by viewModels()
@@ -43,7 +43,7 @@ class HomePageFragment : Fragment() {
     }
 
     private fun initVariables() {
-        foodAdapter = FoodAdapter(
+        adapter = FoodAdapter(
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
                 override fun onClickFavoriteButton(food: Food) {
@@ -83,12 +83,12 @@ class HomePageFragment : Fragment() {
 
         rvHome.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
-        rvHome.adapter = foodAdapter
+        rvHome.adapter = adapter
     }
 
     private fun observe() {
         viewModel.filteredFoods.observe(viewLifecycleOwner) { foods ->
-            foodAdapter.updateData(foods)
+            adapter.updateData(foods)
         }
 
         lifecycleScope.launch {

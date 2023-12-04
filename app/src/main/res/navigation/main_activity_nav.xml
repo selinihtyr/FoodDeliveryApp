@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.selin.fooddeliveryapp.ui.fragment.DetailFragment"
+        android:name="com.selin.fooddeliveryapp.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action

@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
-    private lateinit var cartAdapter: CartAdapter
+    private lateinit var adapter: CartAdapter
 
     private val viewModel: CartViewModel by viewModels()
 
@@ -42,8 +42,8 @@ class CartFragment : Fragment() {
     }
 
     private fun initVariables() {
-        cartAdapter = CartAdapter(
-            cartList = mutableListOf(),
+        adapter = CartAdapter(
+            list = mutableListOf(),
             cartCallback = object : CartAdapter.CartCallback {
                 override fun onClickDelete(cart: FoodCart) {
                     viewModel.delete(cart.cartFoodId, cart.username) {
@@ -82,12 +82,12 @@ class CartFragment : Fragment() {
 
         rvCart.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        rvCart.adapter = cartAdapter
+        rvCart.adapter = adapter
     }
 
     private fun observe() {
-        viewModel.foodsCartList.observe(viewLifecycleOwner) { cartItems ->
-            cartAdapter.updateData(cartItems)
+        viewModel.cartList.observe(viewLifecycleOwner) { cartItems ->
+            adapter.updateData(cartItems)
         }
 
         viewModel.totalPrice.observe(viewLifecycleOwner) { totalPrice ->

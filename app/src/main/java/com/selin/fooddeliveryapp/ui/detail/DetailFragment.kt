@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.ui.fragment
+package com.selin.fooddeliveryapp.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -34,14 +34,14 @@ class DetailFragment : Fragment() {
     }
 
     private fun initViews() {
-        val foodName = arguments?.getString("yemek_adi")
-        val foodPrice = arguments?.getString("yemek_fiyat")
-        val foodImage = arguments?.getString("yemek_resim_adi")
+        val name = arguments?.getString("yemek_adi")
+        val price = arguments?.getString("yemek_fiyat")
+        val image = arguments?.getString("yemek_resim_adi")
 
-        if (foodName != null && foodPrice != null && foodImage != null) {
-            val foodPhoto = "http://kasimadalan.pe.hu/yemekler/resimler/$foodImage"
-            loadImage(foodPhoto)
-            displayFoodDetails(foodName, foodPrice)
+        if (name != null && price != null && image != null) {
+            val photo = "http://kasimadalan.pe.hu/yemekler/resimler/$image"
+            loadImage(photo)
+            displayFoodDetails(name, price)
         }
     }
 

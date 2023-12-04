@@ -15,7 +15,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val foodRepo: FoodRepo
 ) : ViewModel() {
-    val foodsCartList = MutableLiveData<List<FoodCart>>()
+    val cartList = MutableLiveData<List<FoodCart>>()
     val totalPrice = MutableLiveData<Int>()
 
     fun updateCart() {
@@ -28,24 +28,24 @@ class CartViewModel @Inject constructor(
                 totalPrice += cartItem.cartFoodPrice * cartItem.cartFoodOrderQuantity
             }
 
-            foodsCartList.postValue(cartList)
+            this@CartViewModel.cartList.postValue(cartList)
             this@CartViewModel.totalPrice.postValue(totalPrice)
         }
     }
 
     fun addFoodToCart(
-        foodName: String,
-        foodImageName: String,
-        foodPrice: Int,
-        foodOrderQuantity: Int,
+        name: String,
+        imageName: String,
+        price: Int,
+        orderQuantity: Int,
         username: String
     ) {
         viewModelScope.launch {
             foodRepo.addFoodToCart(
-                foodName,
-                foodImageName,
-                foodPrice,
-                foodOrderQuantity,
+                name,
+                imageName,
+                price,
+                orderQuantity,
                 username
             )
         }

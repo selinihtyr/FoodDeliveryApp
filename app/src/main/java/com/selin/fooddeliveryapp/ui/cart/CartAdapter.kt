@@ -7,7 +7,7 @@ import com.selin.fooddeliveryapp.data.model.remote.FoodCart
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartAdapter(
-    private var cartList: List<FoodCart>,
+    private var list: List<FoodCart>,
     private val cartCallback: CartCallback
 ) : RecyclerView.Adapter<CartViewHolder>() {
 
@@ -21,16 +21,16 @@ class CartAdapter(
     }
 
     fun updateData(newData: List<FoodCart>) {
-        cartList = newData
+        list = newData
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return cartList.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        val cart = cartList[position]
+        val cart = list[position]
         holder.bind(cart)
         /*
                     c.ibTrash.setOnClickListener {

@@ -12,17 +12,17 @@ class FoodDataSource(private val api: FoodApi) {
     }
 
     suspend fun addFoodToCart(
-        foodName: String,
-        foodPrice: Int,
-        foodImageName: String,
-        foodOrderQuantity: Int,
+        name: String,
+        price: Int,
+        imageName: String,
+        orderQuantity: Int,
         username: String
     ) {
         val answer = this.api.addFoodToCart(
-            foodName,
-            foodImageName,
-            foodPrice,
-            foodOrderQuantity,
+            name,
+            imageName,
+            price,
+            orderQuantity,
             username
         )
     }
