@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.databinding.FragmentDetailBinding
 import com.selin.fooddeliveryapp.ui.cart.CartViewModel
+import com.selin.fooddeliveryapp.utils.loadImage
+import com.selin.fooddeliveryapp.utils.toSafeInt
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,48 +31,36 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        observe()
     }
 
-    private fun initViews() {
+    private fun initViews() = with(binding){
         val name = arguments?.getString("yemek_adi")
         val price = arguments?.getString("yemek_fiyat")
         val image = arguments?.getString("yemek_resim_adi")
 
-        if (name != null && price != null && image != null) {
+        displayFoodDetails(name = name, price = price, image = image)
+        chipMinus.setOnClickListener { updateQuantity(-1) }
+        chipPlus.setOnClickListener { updateQuantity(1) }
+        chipAddCart.setOnClickListener { addToCart() }
+        tbCartDetail.setOnClickListener { findNavController().navigate(R.id.detailFragment_to_cartFragment) }
+        tbHomeDetail.setOnClickListener { findNavController().navigate(R.id.homepageFragment) }
+        ivBack.setOnClickListener { view?.let { findNavController().popBackStack() } }
+    }
+
+    private fun displayFoodDetails(name: String?, price: String?, image: String?) = with(binding) {
+        if(image != null){
             val photo = "http://kasimadalan.pe.hu/yemekler/resimler/$image"
-            loadImage(photo)
-            displayFoodDetails(name, price)
+            binding.ivFoodImage.loadImage(imageUrl = photo)
         }
-
-        binding.apply {
-            chipMinus.setOnClickListener { updateQuantity(-1) }
-            chipPlus.setOnClickListener { updateQuantity(1) }
-            chipAddCart.setOnClickListener { addToCart() }
-            tbCartDetail.setOnClickListener { findNavController().navigate(R.id.detailFragment_to_cartFragment) }
-            tbHomeDetail.setOnClickListener { findNavController().navigate(R.id.homepageFragment) }
-            ivBack.setOnClickListener { view?.let { findNavController().popBackStack() } }
+        tvFoodName.text = name
+        if(price != null){
+            tvPrice.text = getString(R.string.price, price)
         }
-    }
-
-    private fun observe() {
-
-    }
-
-    private fun loadImage(imageUrl: String) {
-        Glide.with(this)
-            .load(imageUrl)
-            .into(binding.ivFoodImage)
-    }
-
-    private fun displayFoodDetails(name: String, price: String) {
-        binding.tvFoodName.text = getString(R.string.food_name, name)
-        binding.tvPrice.text = getString(R.string.price, price)
     }
 
     private fun updateQuantity(amount: Int) {
         val tvQuantity = binding.tvQuantity
-        var quantity = tvQuantity.text.toString().toIntOrNull() ?: 0
+        var quantity = tvQuantity.text.toString().toSafeInt()
 
         quantity += amount
 
@@ -81,13 +70,13 @@ class DetailFragment : Fragment() {
     }
 
     private fun addToCart() {
-        val quantity = binding.tvQuantity.text.toString().toInt()
-        val foodName = arguments?.getString("yemek_adi")
-        val foodImage = arguments?.getString("yemek_resim_adi")
-        val foodPrice = arguments?.getString("yemek_fiyat")?.toInt() ?: 0
+        val quantity = binding.tvQuantity.text.toString().toSafeInt()
+        val name = arguments?.getString("yemek_adi")
+        val image = arguments?.getString("yemek_resim_adi")
+        val price = arguments?.getString("yemek_fiyat").toSafeInt()
         val username = Credentials.username
 
-        viewModel.addFoodToCart(foodName!!, foodImage!!, foodPrice, quantity, username)
+        viewModel.addFoodToCart(name!!, image!!, price, quantity, username)
 
         findNavController().navigate(R.id.detailFragment_to_cartFragment)
     }

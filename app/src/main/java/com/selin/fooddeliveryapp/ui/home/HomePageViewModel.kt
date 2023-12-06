@@ -43,7 +43,7 @@ class HomePageViewModel @Inject constructor(
             val response = api
                 .addFoodToCart(
                     food.name,
-                    food.imageName,
+                    food.imageName!!,
                     food.price.toInt(),
                     1,
                     Credentials.username
