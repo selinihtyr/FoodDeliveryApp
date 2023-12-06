@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.model.remote.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.FoodCartResponse
 import com.selin.fooddeliveryapp.databinding.FragmentCartBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,9 +45,9 @@ class CartFragment : Fragment() {
         adapter = CartAdapter(
             list = mutableListOf(),
             cartCallback = object : CartAdapter.CartCallback {
-                override fun onClickDelete(cart: FoodCart) {
-                    viewModel.delete(cart.cartFoodId, cart.username) {
-                        viewModel.updateCart()
+                override fun onClickDelete(cart: FoodCartResponse) {
+                    viewModel.delete(cart.id, cart.username) {
+                        viewModel.getCartList()
                     }
                 }
             })
@@ -86,7 +86,7 @@ class CartFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.cartList.observe(viewLifecycleOwner) { cartItems ->
+        viewModel.list.observe(viewLifecycleOwner) { cartItems ->
             adapter.updateData(cartItems)
         }
 
@@ -94,7 +94,7 @@ class CartFragment : Fragment() {
             binding.tvTotalPrice.text = getString(R.string.total_price, totalPrice)
         }
 
-        viewModel.updateCart()
+        viewModel.getCartList()
     }
 
     private fun updateToggleButtonState(isCartSelected: Boolean, isHomeSelected: Boolean) {

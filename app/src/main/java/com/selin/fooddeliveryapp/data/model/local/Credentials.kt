@@ -1,7 +1,7 @@
 package com.selin.fooddeliveryapp.data.model.local
 
-class Username {
+class Credentials {
     companion object {
-        var username: String = "selinIhtiyar"
+        const val username: String = "selinIhtiyar"
     }
 }

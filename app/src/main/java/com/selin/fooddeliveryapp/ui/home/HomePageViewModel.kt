@@ -3,8 +3,8 @@ package com.selin.fooddeliveryapp.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.selin.fooddeliveryapp.data.model.remote.Food
-import com.selin.fooddeliveryapp.data.model.local.Username
+import com.selin.fooddeliveryapp.data.model.remote.FoodResponse
+import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import com.selin.fooddeliveryapp.data.remote.FoodApi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +18,8 @@ class HomePageViewModel @Inject constructor(
     private val repository: FoodRepo,
     private val api: FoodApi
 ) : ViewModel() {
-    private val list = MutableLiveData<List<Food>>()
-    val filteredFoods = MutableLiveData<List<Food>>()
+    private val list = MutableLiveData<List<FoodResponse>>()
+    val filteredFoods = MutableLiveData<List<FoodResponse>>()
     val showMessage = MutableSharedFlow<String>()
 
     init {
@@ -38,7 +38,7 @@ class HomePageViewModel @Inject constructor(
         }
     }
 
-    fun addToCart(food: Food) {
+    fun addToCart(food: FoodResponse) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = api
                 .addFoodToCart(
@@ -46,7 +46,7 @@ class HomePageViewModel @Inject constructor(
                     food.imageName,
                     food.price.toInt(),
                     1,
-                    Username.username
+                    Credentials.username
                 )
             if (response.success == 1) {
                 showMessage.emit("Item added to cart successfully")

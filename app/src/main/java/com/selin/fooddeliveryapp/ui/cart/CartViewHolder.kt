@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.ui.cart
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.selin.fooddeliveryapp.data.model.remote.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.FoodCartResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartViewHolder(
@@ -11,24 +11,21 @@ class CartViewHolder(
     private val cartCallback: CartAdapter.CartCallback
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(cart: FoodCart) {
-        val context = binding.root.context
-        val card = binding
-        card.tvFoodName.text = cart.cartFoodName
-        card.tvQuantity.text = cart.cartFoodOrderQuantity.toString()
-        val tbPrice = cart.cartFoodPrice
-        val totalPrice = cart.cartFoodOrderQuantity * tbPrice
-        card.tvPrice.text = "${totalPrice}₺"
-
-        card.ibTrash.setOnClickListener {
+    fun bind(cart: FoodCartResponse) = with(binding) {
+        tvFoodName.text = cart.name
+        tvQuantity.text = cart.orderQuantity.toString()
+        val tbPrice = cart.price
+        val totalPrice = cart.orderQuantity * tbPrice
+        tvPrice.text = "${totalPrice}₺"
+        ibTrash.setOnClickListener {
             cartCallback.onClickDelete(cart)
         }
 
-        loadImage(context = context, cart = cart)
+        //loadImage(cart = cart)
     }
 
-    private fun loadImage(context: Context, cart: FoodCart) {
-        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${cart.cartImageName}"
+    private fun loadImage(context: Context, cart: FoodCartResponse) {
+        val url = "http://kasimadalan.pe.hu/yemekler/resimler/${cart.imageName}"
         Glide.with(context)
             .load(url)
             .override(300, 300)

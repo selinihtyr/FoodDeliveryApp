@@ -21,8 +21,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideFoodDataSource(foodApi: FoodApi): FoodDataSource {
-        return FoodDataSource(foodApi)
+    fun provideFoodDataSource(api: FoodApi): FoodDataSource {
+        return FoodDataSource(api)
     }
 
     @Provides

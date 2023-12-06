@@ -1,11 +1,11 @@
 package com.selin.fooddeliveryapp.data.model.response
 
 import com.google.gson.annotations.SerializedName
-import com.selin.fooddeliveryapp.data.model.remote.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.FoodCartResponse
 
 data class FoodCartResponse(
     @SerializedName("sepet_yemekler")
-    var foods: List<FoodCart>,
-    var success: Int
-) {
-}
+    val foods: List<FoodCartResponse>,
+    @SerializedName("success")
+    val success: Int
+)

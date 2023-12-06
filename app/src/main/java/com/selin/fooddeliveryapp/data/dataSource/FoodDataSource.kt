@@ -1,13 +1,13 @@
 package com.selin.fooddeliveryapp.data.dataSource
 
-import com.selin.fooddeliveryapp.data.model.remote.Food
-import com.selin.fooddeliveryapp.data.model.remote.FoodCart
+import com.selin.fooddeliveryapp.data.model.remote.FoodResponse
+import com.selin.fooddeliveryapp.data.model.remote.FoodCartResponse
 import com.selin.fooddeliveryapp.data.remote.FoodApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class FoodDataSource(private val api: FoodApi) {
-    suspend fun getAllFoods(): List<Food> = withContext(Dispatchers.IO) {
+    suspend fun getAllFoods(): List<FoodResponse> = withContext(Dispatchers.IO) {
         return@withContext api.getAllFoods().foods
     }
 
@@ -18,7 +18,7 @@ class FoodDataSource(private val api: FoodApi) {
         orderQuantity: Int,
         username: String
     ) {
-        val answer = this.api.addFoodToCart(
+        this.api.addFoodToCart(
             name,
             imageName,
             price,
@@ -27,7 +27,7 @@ class FoodDataSource(private val api: FoodApi) {
         )
     }
 
-    suspend fun getCartFoods(username: String): List<FoodCart> = withContext(Dispatchers.IO) {
+    suspend fun getCartFoods(username: String): List<FoodCartResponse> = withContext(Dispatchers.IO) {
         try {
             val call = api.getCartFoods(username)
             val response = call.execute()
@@ -42,6 +42,6 @@ class FoodDataSource(private val api: FoodApi) {
     }
 
     suspend fun deleteFoodFromCart(cartFoodId: Int, username: String) {
-        val answer = api.deleteFoodFromCart(cartFoodId, username)
+        api.deleteFoodFromCart(cartFoodId, username)
     }
 }
