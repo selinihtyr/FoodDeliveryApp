@@ -1,11 +1,11 @@
-package com.selin.fooddeliveryapp.data.model.remote
+package com.selin.fooddeliveryapp.data.model.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class FoodCartResponse(
+data class FoodCartListResponse(
     @SerializedName("sepet_yemek_id") var id: Int,
     @SerializedName("yemek_adi") var name: String,
     @SerializedName("yemek_resim_adi") var imageName: String,

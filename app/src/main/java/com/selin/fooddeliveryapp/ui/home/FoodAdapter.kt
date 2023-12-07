@@ -3,18 +3,18 @@ package com.selin.fooddeliveryapp.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.selin.fooddeliveryapp.data.model.remote.FoodResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodAdapter(
-    private var foods: List<FoodResponse>,
+    private var foods: List<FoodListResponse>,
     private val foodCallbacks: FoodCallback
 ) : RecyclerView.Adapter<FoodViewHolder>() {
 
     interface FoodCallback {
-        fun onClickFavoriteButton(food: FoodResponse)
-        fun onClickDetail(food: FoodResponse)
-        fun onClickAddToCart(food: FoodResponse)
+        fun onClickFavoriteButton(food: FoodListResponse)
+        fun onClickDetail(food: FoodListResponse)
+        fun onClickAddToCart(food: FoodListResponse)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -22,7 +22,7 @@ class FoodAdapter(
         return FoodViewHolder(binding, foodCallbacks)
     }
 
-    fun updateData(newData: List<FoodResponse>) {
+    fun updateData(newData: List<FoodListResponse>) {
         foods = newData
         notifyDataSetChanged()
     }

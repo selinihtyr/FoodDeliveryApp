@@ -3,16 +3,16 @@ package com.selin.fooddeliveryapp.ui.cart
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.selin.fooddeliveryapp.data.model.remote.FoodCartResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartAdapter(
-    private var list: List<FoodCartResponse>,
+    private var list: List<FoodCartListResponse>,
     private val cartCallback: CartCallback
 ) : RecyclerView.Adapter<CartViewHolder>() {
 
     interface CartCallback {
-        fun onClickDelete(cart: FoodCartResponse)
+        fun onClickDelete(cart: FoodCartListResponse)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -20,7 +20,7 @@ class CartAdapter(
         return CartViewHolder(binding, cartCallback)
     }
 
-    fun updateData(newData: List<FoodCartResponse>) {
+    fun updateData(newData: List<FoodCartListResponse>) {
         list = newData
         notifyDataSetChanged()
     }

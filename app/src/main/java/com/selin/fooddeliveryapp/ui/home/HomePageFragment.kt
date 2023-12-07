@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.model.remote.FoodResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -46,11 +46,11 @@ class HomePageFragment : Fragment() {
         adapter = FoodAdapter(
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
-                override fun onClickFavoriteButton(food: FoodResponse) {
+                override fun onClickFavoriteButton(food: FoodListResponse) {
 
                 }
 
-                override fun onClickDetail(food: FoodResponse) {
+                override fun onClickDetail(food: FoodListResponse) {
                     val bundle = Bundle().apply {
                         putString("yemek_adi", food.name)
                         putString("yemek_fiyat", food.price)
@@ -59,7 +59,7 @@ class HomePageFragment : Fragment() {
                     findNavController().navigate(R.id.transitationDetail, bundle)
                 }
 
-                override fun onClickAddToCart(food: FoodResponse) {
+                override fun onClickAddToCart(food: FoodListResponse) {
                     viewModel.addToCart(food)
                 }
             })

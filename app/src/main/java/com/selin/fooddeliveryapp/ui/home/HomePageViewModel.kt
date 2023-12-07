@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.selin.fooddeliveryapp.data.model.remote.FoodResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import com.selin.fooddeliveryapp.data.remote.FoodApi
@@ -18,8 +18,8 @@ class HomePageViewModel @Inject constructor(
     private val repository: FoodRepo,
     private val api: FoodApi
 ) : ViewModel() {
-    private val list = MutableLiveData<List<FoodResponse>>()
-    val filteredFoods = MutableLiveData<List<FoodResponse>>()
+    private val list = MutableLiveData<List<FoodListResponse>>()
+    val filteredFoods = MutableLiveData<List<FoodListResponse>>()
     val showMessage = MutableSharedFlow<String>()
 
     init {
@@ -38,7 +38,7 @@ class HomePageViewModel @Inject constructor(
         }
     }
 
-    fun addToCart(food: FoodResponse) {
+    fun addToCart(food: FoodListResponse) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = api
                 .addFoodToCart(
