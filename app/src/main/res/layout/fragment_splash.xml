@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/avSplashFood"
+        android:id="@+id/avSignIn"
         android:layout_width="266dp"
         android:layout_height="241dp"
         android:layout_marginTop="48dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avSplashFood" />
+        app:layout_constraintTop_toBottomOf="@+id/avSignIn" />
 
     <TextView
         android:id="@+id/textView"

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/transitationMap"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/homepageToSignIn"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -45,6 +48,9 @@
         <action
             android:id="@+id/transitationHome"
             app:destination="@id/homepageFragment" />
+        <action
+            android:id="@+id/splashToSignIn"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -60,4 +66,23 @@
         android:name="com.selin.fooddeliveryapp.ui.end.EndFragment"
         android:label="fragment_end"
         tools:layout="@layout/fragment_end" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.selin.fooddeliveryapp.ui.signIn.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/signInToSignUp"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/signInToHomepage"
+            app:destination="@id/homepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.selin.fooddeliveryapp.ui.signUp.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/signUpTpSignIn"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
