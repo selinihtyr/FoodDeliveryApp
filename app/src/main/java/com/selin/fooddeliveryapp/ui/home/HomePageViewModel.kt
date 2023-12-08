@@ -3,6 +3,8 @@ package com.selin.fooddeliveryapp.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
@@ -60,5 +62,9 @@ class HomePageViewModel @Inject constructor(
             food.name.contains(query, ignoreCase = true)
         }
         filteredFoods.value = filteredResults
+    }
+
+    fun logout() {
+        Firebase.auth.signOut()
     }
 }

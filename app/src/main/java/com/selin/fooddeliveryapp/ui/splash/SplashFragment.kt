@@ -1,7 +1,6 @@
 package com.selin.fooddeliveryapp.ui.splash
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.FragmentSplashBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding
@@ -27,7 +25,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel.startTimer {
-            findNavController().navigate(R.id.transitationHome)
+            findNavController().navigate(R.id.splashToSignIn)
         }
     }
 }

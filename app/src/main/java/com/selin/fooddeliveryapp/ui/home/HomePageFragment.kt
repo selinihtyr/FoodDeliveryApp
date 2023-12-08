@@ -69,6 +69,10 @@ class HomePageFragment : Fragment() {
         tbCartHome.setOnClickListener { toggleCartSelection() }
         tbHomeHome.setOnClickListener { toggleHomeSelection() }
         ibMap.setOnClickListener { navigateToMapFragment() }
+        ibLogout.setOnClickListener {
+            viewModel.logout()
+            findNavController().navigate(R.id.homepageToSignIn)
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

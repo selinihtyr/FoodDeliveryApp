@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.SignInBinding
+import kotlinx.coroutines.launch
 
 class SignInFragment : Fragment() {
     private lateinit var binding: SignInBinding
@@ -17,11 +22,42 @@ class SignInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = SignInBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.checkUserInfo()
+        viewModel.setNavigateToHomepageCallback {
+            findNavController().navigate(R.id.signInToHomepage)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.message.collect { message ->
+                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun initViews() = with(binding) {
+        btnSignIn.setOnClickListener {
+            val email = etInEmail.text.toString()
+            val password = etInPassword.text.toString()
+
+            viewModel.login(email, password) { success ->
+                if (success) {
+                    findNavController().navigate(R.id.signInToHomepage)
+                }
+            }
+        }
+        tvSignUp.setOnClickListener {
+            findNavController().navigate(R.id.signInToSignUp)
+        }
     }
 
 }

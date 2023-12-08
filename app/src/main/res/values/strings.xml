@@ -10,5 +10,23 @@
     <string name="cart_empty">Your cart is empty!</string>
     <string name="order_confirmed">Order is confirmed!</string>
     <string name="total_price">%d₺</string>
+    <string name="not_registered_yet_sign_up">Not Registered Yet, Sign Up !</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="type_your_email">Type Your Email</string>
+    <string name="sign_in_to_continue">Sign In to continue</string>
+    <string name="welcome">Welcome,</string>
+    <string name="already_registered_sign_in">Already Registered, Sign In !</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up_to_continue">Sign Up to continue</string>
+
+    <string name="fill_blanks_text">Fill in the blanks!</string>
+    <string name="password_alert">Password length must be minimum 6 characters long!</string>
+    <string name="ınvalid_alert">Invalid email address!</string>
+    <string name="wrong_username_pass">Wrong email and password!</string>
+    <string name="check_information">Check Information</string>
+    <string name="password_is_not_the_same">Password is not the same.</string>
+    <string name="verification_email_error">Your information does not match, or you did not register.</string>
+    <string name="this_mail_is_in_use">This mail is in use.</string>
 
 </resources>

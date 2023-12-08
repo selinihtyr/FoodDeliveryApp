@@ -95,4 +95,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/map" />
 
+    <ImageButton
+        android:id="@+id/ibLogout"
+        android:layout_width="51dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

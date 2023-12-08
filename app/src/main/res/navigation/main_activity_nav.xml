@@ -82,7 +82,7 @@
         android:name="com.selin.fooddeliveryapp.ui.signUp.SignUpFragment"
         android:label="SignUpFragment" >
         <action
-            android:id="@+id/signUpTpSignIn"
+            android:id="@+id/signUpToSignIn"
             app:destination="@id/signInFragment" />
     </fragment>
 </navigation>
