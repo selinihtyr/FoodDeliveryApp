@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class SignInViewModel(application: Application) : AndroidViewModel(application) {
     private val auth = FirebaseAuth.getInstance()
     private var navigateToHomepageCallback: (() -> Unit)? = null
-    private val _message = MutableSharedFlow<String>() // Changed to String
+    private val _message = MutableSharedFlow<String>()
     val message: SharedFlow<String> get() = _message
 
     fun login(email: String, password: String, callback: (Boolean) -> Unit) {

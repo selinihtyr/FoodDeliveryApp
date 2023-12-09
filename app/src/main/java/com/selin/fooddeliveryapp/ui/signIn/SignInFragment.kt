@@ -32,7 +32,7 @@ class SignInFragment : Fragment() {
         observe()
     }
 
-    private fun observe() {
+    private fun observe() = with(binding) {
         viewModel.checkUserInfo()
         viewModel.setNavigateToHomepageCallback {
             findNavController().navigate(R.id.signInToHomepage)
@@ -42,9 +42,6 @@ class SignInFragment : Fragment() {
                 Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun initViews() = with(binding) {
         btnSignIn.setOnClickListener {
             val email = etInEmail.text.toString()
             val password = etInPassword.text.toString()
@@ -55,9 +52,11 @@ class SignInFragment : Fragment() {
                 }
             }
         }
-        tvSignUp.setOnClickListener {
+    }
+
+    private fun initViews() {
+        binding.tvSignUp.setOnClickListener {
             findNavController().navigate(R.id.signInToSignUp)
         }
     }
-
 }
