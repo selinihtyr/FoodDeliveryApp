@@ -21,7 +21,7 @@ class HomePageViewModel @Inject constructor(
     private val api: FoodApi
 ) : ViewModel() {
     private val list = MutableLiveData<List<FoodListResponse>>()
-    val filteredFoods = MutableLiveData<List<FoodListResponse>>()
+    val _list = MutableLiveData<List<FoodListResponse>>()
     val showMessage = MutableSharedFlow<String>()
 
     init {
@@ -33,7 +33,7 @@ class HomePageViewModel @Inject constructor(
             try {
                 val allFoods = repository.getAllFoods()
                 list.value = allFoods
-                filteredFoods.value = allFoods
+                _list.value = allFoods
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -50,7 +50,7 @@ class HomePageViewModel @Inject constructor(
                     1,
                     Credentials.username
                 )
-            if (response.success == 1) {
+            if (response.isSuccess) {
                 showMessage.emit("Item added to cart successfully")
             }
         }
@@ -61,7 +61,7 @@ class HomePageViewModel @Inject constructor(
         val filteredResults = allFoods.filter { food ->
             food.name.contains(query, ignoreCase = true)
         }
-        filteredFoods.value = filteredResults
+        _list.value = filteredResults
     }
 
     fun logout() {

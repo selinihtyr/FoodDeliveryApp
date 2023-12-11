@@ -1,5 +1,6 @@
 package com.selin.fooddeliveryapp.data.repo
 
+import com.selin.fooddeliveryapp.data.model.response.CRUDResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.data.remote.FoodApi
@@ -17,11 +18,11 @@ class FoodRepo(private val service: FoodApi) {
         imageName: String,
         orderQuantity: Int,
         username: String
-    ) {
-        this.service.addFoodToCart(
+    ): CRUDResponse  {
+        return service.addFoodToCart(
             name,
-            imageName,
-            price,
+            price.toString(),
+            imageName.toInt(),
             orderQuantity,
             username
         )

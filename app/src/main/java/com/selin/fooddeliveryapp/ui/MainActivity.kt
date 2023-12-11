@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp
+package com.selin.fooddeliveryapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

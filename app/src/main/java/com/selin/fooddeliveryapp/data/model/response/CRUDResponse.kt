@@ -1,5 +1,12 @@
 package com.selin.fooddeliveryapp.data.model.response
 
+import com.google.gson.annotations.SerializedName
+
 data class CRUDResponse(
+    @SerializedName("success")
     val success: Int,
-    val message: String)
+    @SerializedName("message")
+    val message: String){
+    val isSuccess: Boolean
+        get() = success == 1
+}

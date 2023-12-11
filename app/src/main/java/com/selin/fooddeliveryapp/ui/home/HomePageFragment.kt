@@ -91,7 +91,7 @@ class HomePageFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.filteredFoods.observe(viewLifecycleOwner) { foods ->
+        viewModel._list.observe(viewLifecycleOwner) { foods ->
             adapter.updateData(foods)
         }
 

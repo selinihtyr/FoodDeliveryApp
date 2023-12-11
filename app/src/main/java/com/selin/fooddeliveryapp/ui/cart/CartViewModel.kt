@@ -33,24 +33,6 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    fun addFoodToCart(
-        name: String,
-        imageName: String,
-        price: Int,
-        orderQuantity: Int,
-        username: String
-    ) {
-        viewModelScope.launch {
-            foodRepo.addFoodToCart(
-                name,
-                imageName.toInt(),
-                price.toString(),
-                orderQuantity,
-                username
-            )
-        }
-    }
-
     fun delete(cartFoodId: Int, username: String, callback: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             foodRepo.deleteFoodFromCart(cartFoodId, username)

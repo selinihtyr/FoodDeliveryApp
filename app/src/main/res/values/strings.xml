@@ -21,7 +21,7 @@
     <string name="sign_up_to_continue">Sign Up to continue</string>
 
     <string name="fill_blanks_text">Fill in the blanks!</string>
-    <string name="password_alert">Password length must be minimum 6 characters long!</string>
+    <string name="password_insufficient">Password length must be minimum 6 characters long!</string>
     <string name="ınvalid_alert">Invalid email address!</string>
     <string name="wrong_username_pass">Wrong email and password!</string>
     <string name="check_information">Check Information</string>
