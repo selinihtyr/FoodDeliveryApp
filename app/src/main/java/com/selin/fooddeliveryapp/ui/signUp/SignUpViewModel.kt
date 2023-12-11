@@ -1,62 +1,63 @@
 package com.selin.fooddeliveryapp.ui.signUp
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.selin.fooddeliveryapp.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-
-class SignUpViewModel(application: Application) : AndroidViewModel(application) {
+import javax.inject.Inject
+@HiltViewModel
+class SignUpViewModel @Inject constructor() : ViewModel(){
     private val auth = FirebaseAuth.getInstance()
-    private val _message = MutableSharedFlow<String>()
-    val message: SharedFlow<String> get() = _message
+    private val _navigateToSignInScreen = MutableSharedFlow<Unit>()
+    val navigateToSignInScreen: SharedFlow<Unit> get() = _navigateToSignInScreen
+    private val _error = MutableSharedFlow<SignUpError>()
+    val error: SharedFlow<SignUpError> get() = _error
 
     fun signUp(
         email: String,
         password: String,
         confirmPassword: String,
-        callback: (Boolean) -> Unit
     ) {
-        val context = getApplication<Application>().applicationContext
 
         if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            sendMessage(context.getString(R.string.fill_blanks_text))
-            callback(false)
+            sendError(SignUpError.FILL_IN_THE_BLANKS)
             return
         }
         if (password.length < 6 || confirmPassword.length < 6) {
-            sendMessage(context.getString(R.string.password_alert))
-            callback(false)
+            sendError(SignUpError.MIN_PASSWORD_LENGTH)
             return
         }
         if (password != confirmPassword) {
-            sendMessage(context.getString(R.string.password_is_not_the_same))
-            callback(false)
+            sendError(SignUpError.DIFFERENT_PASSWORD)
             return
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            sendMessage(context.getString(R.string.ınvalid_alert))
-            callback(false)
+            sendError(SignUpError.INVALID_EMAIL_ADDRESS)
             return
         }
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    callback(true)
+                    navigateToSignInScreen()
                 } else {
-                    sendMessage(context.getString(R.string.this_mail_is_in_use))
-                    callback(false)
+                    sendError(SignUpError.EMAIL_ALREADY_IN_USE)
                 }
             }
     }
 
-    private fun sendMessage(message: String) {
+    private fun sendError(error: SignUpError) {
         viewModelScope.launch {
-            _message.emit(message)
+            _error.emit(error)
+        }
+    }
+
+    private fun navigateToSignInScreen() {
+        viewModelScope.launch {
+            _navigateToSignInScreen.emit(Unit)
         }
     }
 }

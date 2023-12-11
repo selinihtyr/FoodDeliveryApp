@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.SignUpBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
     private lateinit var binding: SignUpBinding
     private val viewModel: SignUpViewModel by viewModels()
@@ -34,8 +36,14 @@ class SignUpFragment : Fragment() {
 
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.message.collect { message ->
-                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+            viewModel.error.collect { error: SignUpError ->
+                val stringResourceId = SignUpError.toStringResource(error)
+                Snackbar.make(requireView(), stringResourceId, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.navigateToSignInScreen.collect {
+                findNavController().navigate(R.id.signUpToSignIn)
             }
         }
     }
@@ -54,12 +62,7 @@ class SignUpFragment : Fragment() {
                 ).show()
                 return@setOnClickListener
             }
-
-            viewModel.signUp(email, password, confirmPassword) { success ->
-                if (success) {
-                    findNavController().navigate(R.id.signUpToSignIn)
-                }
-            }
+            viewModel.signUp(email, password, confirmPassword)
         }
         tvSignIn.setOnClickListener {
             findNavController().navigate(R.id.signUpToSignIn)

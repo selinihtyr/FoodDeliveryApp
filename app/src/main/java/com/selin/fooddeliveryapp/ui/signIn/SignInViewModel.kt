@@ -1,64 +1,63 @@
 package com.selin.fooddeliveryapp.ui.signIn
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.selin.fooddeliveryapp.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class SignInViewModel @Inject constructor() : ViewModel() {
     private val auth = FirebaseAuth.getInstance()
-    private var navigateToHomepageCallback: (() -> Unit)? = null
-    private val _message = MutableSharedFlow<String>()
-    val message: SharedFlow<String> get() = _message
 
-    fun login(email: String, password: String, callback: (Boolean) -> Unit) {
-        val context = getApplication<Application>().applicationContext
+    private val _navigateScreen = MutableSharedFlow<Unit>()
+    val navigateScreen: SharedFlow<Unit> get() = _navigateScreen
 
+    private val _error = MutableSharedFlow<SignInError>()
+    val error: SharedFlow<SignInError> get() = _error
+
+    fun checkUserInfo() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            navigateToHomeScreen()
+        }
+    }
+
+    fun signIn(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {
-            sendMessage(context.getString(R.string.fill_blanks_text))
-            callback(false)
+            sendError(SignInError.FILL_IN_THE_BLANKS)
             return
         }
         if (password.length < 6) {
-            sendMessage(context.getString(R.string.password_alert))
-            callback(false)
+            sendError(SignInError.MIN_PASSWORD_LENGTH)
             return
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            sendMessage(context.getString(R.string.ınvalid_alert))
-            callback(false)
+            sendError(SignInError.INVALID_EMAIL_ADDRESS)
             return
         }
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
-                    callback(true)
+                    _navigateScreen
                 } else {
-                    sendMessage(context.getString(R.string.verification_email_error))
-                    callback(false)
+                    sendError(SignInError.CHECK_INFORMATION)
                 }
             }
     }
 
-    private fun sendMessage(message: String) {
+    private fun navigateToHomeScreen() {
         viewModelScope.launch {
-            _message.emit(message)
+            _navigateScreen.emit(Unit)
         }
     }
 
-    fun setNavigateToHomepageCallback(callback: () -> Unit) {
-        navigateToHomepageCallback = callback
-    }
-
-    fun checkUserInfo() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            navigateToHomepageCallback?.invoke()
+    private fun sendError(error: SignInError) {
+        viewModelScope.launch {
+            _error.emit(error)
         }
     }
 }

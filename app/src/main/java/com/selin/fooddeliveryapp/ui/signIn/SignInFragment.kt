@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.SignInBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
     private lateinit var binding: SignInBinding
     private val viewModel: SignInViewModel by viewModels()
@@ -30,27 +32,25 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observe()
+        viewModel.checkUserInfo()
     }
 
     private fun observe() = with(binding) {
-        viewModel.checkUserInfo()
-        viewModel.setNavigateToHomepageCallback {
-            findNavController().navigate(R.id.signInToHomepage)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.navigateScreen.collect {
+                findNavController().navigate(R.id.signInToHomepage)
+            }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.message.collect { message ->
-                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+            viewModel.error.collect { error: SignInError ->
+                val stringResourceId = SignInError.toStringResource(error)
+                Snackbar.make(requireView(), stringResourceId, Snackbar.LENGTH_SHORT).show()
             }
         }
         btnSignIn.setOnClickListener {
             val email = etInEmail.text.toString()
             val password = etInPassword.text.toString()
-
-            viewModel.login(email, password) { success ->
-                if (success) {
-                    findNavController().navigate(R.id.signInToHomepage)
-                }
-            }
+            viewModel.signIn(email, password)
         }
     }
 
