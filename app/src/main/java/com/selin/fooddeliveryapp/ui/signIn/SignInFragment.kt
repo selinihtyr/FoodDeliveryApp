@@ -36,7 +36,7 @@ class SignInFragment : Fragment() {
     }
 
     private fun observe() = with(binding) {
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigateScreen.collect {
                 findNavController().navigate(R.id.signInToHomepage)
             }

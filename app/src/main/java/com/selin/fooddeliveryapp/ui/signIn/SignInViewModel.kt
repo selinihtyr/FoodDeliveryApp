@@ -42,7 +42,7 @@ class SignInViewModel @Inject constructor() : ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _navigateScreen
+                    navigateToHomeScreen()
                 } else {
                     sendError(SignInError.CHECK_INFORMATION)
                 }
