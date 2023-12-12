@@ -22,10 +22,9 @@ class SignInViewModel @Inject constructor() : ViewModel() {
     fun checkUserInfo() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            navigateToHomeScreen()
+            isUserLoggedIn()
         }
     }
-
     fun signIn(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {
             sendError(SignInError.FILL_IN_THE_BLANKS)
@@ -48,16 +47,17 @@ class SignInViewModel @Inject constructor() : ViewModel() {
                 }
             }
     }
-
     private fun navigateToHomeScreen() {
         viewModelScope.launch {
             _navigateScreen.emit(Unit)
         }
     }
-
     private fun sendError(error: SignInError) {
         viewModelScope.launch {
             _error.emit(error)
         }
+    }
+    fun isUserLoggedIn(): Boolean {
+        return auth.currentUser != null
     }
 }

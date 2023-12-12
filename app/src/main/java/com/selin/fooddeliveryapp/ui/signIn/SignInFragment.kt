@@ -27,14 +27,12 @@ class SignInFragment : Fragment() {
         binding = SignInBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observe()
         viewModel.checkUserInfo()
     }
-
     private fun observe() = with(binding) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigateScreen.collect {
@@ -53,7 +51,6 @@ class SignInFragment : Fragment() {
             viewModel.signIn(email, password)
         }
     }
-
     private fun initViews() {
         binding.tvSignUp.setOnClickListener {
             findNavController().navigate(R.id.signInToSignUp)
