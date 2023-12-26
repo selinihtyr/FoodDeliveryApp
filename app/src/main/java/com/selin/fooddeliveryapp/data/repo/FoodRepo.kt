@@ -14,18 +14,12 @@ class FoodRepo(private val service: FoodApi) {
 
     suspend fun addFoodToCart(
         name: String,
-        price: Int,
         imageName: String,
+        price: Int,
         orderQuantity: Int,
         username: String
-    ): CRUDResponse  {
-        return service.addFoodToCart(
-            name,
-            price.toString(),
-            imageName.toInt(),
-            orderQuantity,
-            username
-        )
+    ) = withContext(Dispatchers.IO) {
+        return@withContext service.addFoodToCart(name, imageName, price, orderQuantity, username)
     }
 
     suspend fun getCartFoods(username: String): List<FoodCartListResponse> =

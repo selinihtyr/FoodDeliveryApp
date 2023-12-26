@@ -31,9 +31,17 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observe()
-        viewModel.checkUserInfo()
     }
+
+    private fun initViews() {
+        binding.tvSignUp.setOnClickListener {
+            findNavController().navigate(R.id.signInToSignUp)
+        }
+    }
+
     private fun observe() = with(binding) {
+        viewModel.checkUserInfo()
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigateScreen.collect {
                 findNavController().navigate(R.id.signInToHomepage)
@@ -49,11 +57,6 @@ class SignInFragment : Fragment() {
             val email = etInEmail.text.toString()
             val password = etInPassword.text.toString()
             viewModel.signIn(email, password)
-        }
-    }
-    private fun initViews() {
-        binding.tvSignUp.setOnClickListener {
-            findNavController().navigate(R.id.signInToSignUp)
         }
     }
 }

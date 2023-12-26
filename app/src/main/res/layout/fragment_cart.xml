@@ -8,7 +8,7 @@
     tools:context=".ui.cart.CartFragment">
 
     <ToggleButton
-        android:id="@+id/tbCartCart"
+        android:id="@+id/tbCartIcon"
         android:layout_width="54dp"
         android:layout_height="46dp"
         android:layout_marginEnd="90dp"
@@ -37,7 +37,7 @@
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tbCartCart"
+        app:layout_constraintEnd_toStartOf="@+id/tbCartIcon"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 

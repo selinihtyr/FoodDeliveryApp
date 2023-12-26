@@ -10,10 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.model.local.Credentials.Companion.username
 import com.selin.fooddeliveryapp.databinding.FragmentDetailBinding
-import com.selin.fooddeliveryapp.ui.cart.CartViewModel
 import com.selin.fooddeliveryapp.utils.loadImage
 import com.selin.fooddeliveryapp.utils.toSafeInt
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,49 +35,59 @@ class DetailFragment : Fragment() {
         observe()
     }
 
-    private fun initViews() = with(binding){
+    private fun initViews() = with(binding) {
         val name = arguments?.getString("yemek_adi")
         val price = arguments?.getString("yemek_fiyat")
         val image = arguments?.getString("yemek_resim_adi")
-
         displayFoodDetails(name = name, price = price, image = image)
-        chipMinus.setOnClickListener {
-            viewModel.decreaseOrderQuantity(binding.tvQuantity.text.toString().toSafeInt())
-        }
-        chipPlus.setOnClickListener {
-            viewModel.increaseOrderQuantity(binding.tvQuantity.text.toString().toSafeInt())
-        }
-        chipAddCart.setOnClickListener { addToCart() }
         tbCartDetail.setOnClickListener { findNavController().navigate(R.id.detailFragment_to_cartFragment) }
         tbHomeDetail.setOnClickListener { findNavController().navigate(R.id.homepageFragment) }
         ivBack.setOnClickListener { view?.let { findNavController().popBackStack() } }
     }
 
-    private fun observe(){
+    private fun observe() = with(binding) {
+        chipAddCart.setOnClickListener { addToCart() }
+        chipMinus.setOnClickListener { viewModel.decreaseOrderQuantity() }
+        chipPlus.setOnClickListener { viewModel.increaseOrderQuantity() }
+        tvPrice.text = getString(R.string.price, tvPrice.text.toString())
+        tvQuantity.text = "${viewModel.quantity.value}"
+
         lifecycleScope.launchWhenStarted {
             viewModel.message.collect {
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
             }
         }
+        viewModel.quantity.observe(viewLifecycleOwner) { newQuantity ->
+            tvQuantity.text = "$newQuantity"
+
+            val price = arguments?.getString("yemek_fiyat").toSafeInt() ?: 0
+            val quantityText = viewModel.quantityText.value ?: 1
+            val totalPrice = price * newQuantity * quantityText
+
+            tvPrice.text = getString(R.string.price, totalPrice.toString())
+        }
     }
 
     private fun displayFoodDetails(name: String?, price: String?, image: String?) = with(binding) {
-        if(image != null){
+        if (image != null) {
             val photo = "http://kasimadalan.pe.hu/yemekler/resimler/$image"
             binding.ivFoodImage.loadImage(imageUrl = photo)
         }
         tvFoodName.text = name
-        if(price != null){
-            tvPrice.text = getString(R.string.price, price)
+
+        if (price != null) {
+            val quantityText = viewModel.quantityText.value ?: 1
+            val totalPrice = price.toSafeInt() * viewModel.quantity.value!! * quantityText
+            tvPrice.text = getString(R.string.price, totalPrice.toString())
         }
     }
 
-    private fun addToCart(){
-        val quantity = binding.tvQuantity.text.toString().toSafeInt()
+    private fun addToCart() {
+        val quantity = viewModel.quantity.value ?: 1
         val name = arguments?.getString("yemek_adi")
         val image = arguments?.getString("yemek_resim_adi")
         val price = arguments?.getString("yemek_fiyat").toSafeInt()
-        viewModel.addFoodToCart(name!!, image!!, price, quantity, username)
+        viewModel.addToCart(name!!, image!!, price, quantity, username)
         findNavController().navigate(R.id.detailFragment_to_cartFragment)
     }
 }

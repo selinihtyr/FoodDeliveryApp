@@ -70,7 +70,7 @@ class CartFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        tbCartCart.setOnClickListener {
+        tbCartIcon.setOnClickListener {
             updateToggleButtonState(true, false)
             navigateToFragment(R.id.cartFragment)
         }
@@ -100,7 +100,7 @@ class CartFragment : Fragment() {
     private fun updateToggleButtonState(isCartSelected: Boolean, isHomeSelected: Boolean) {
         this.isCartSelected = isCartSelected
         this.isHomeSelected = isHomeSelected
-        updateButtonBackground(binding.tbCartCart, isCartSelected)
+        updateButtonBackground(binding.tbCartIcon, isCartSelected)
         updateButtonBackground(binding.tbHomeCart, isHomeSelected)
     }
 

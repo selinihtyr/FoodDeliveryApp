@@ -21,8 +21,9 @@ class SignInViewModel @Inject constructor() : ViewModel() {
 
     fun checkUserInfo() {
         val currentUser = auth.currentUser
-        if (currentUser != null) {
-            isUserLoggedIn()
+        val isUserLoggedIn = currentUser != null
+        if (isUserLoggedIn) {
+            navigateToHomeScreen()
         }
     }
     fun signIn(email: String, password: String) {
@@ -56,8 +57,5 @@ class SignInViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             _error.emit(error)
         }
-    }
-    fun isUserLoggedIn(): Boolean {
-        return auth.currentUser != null
     }
 }

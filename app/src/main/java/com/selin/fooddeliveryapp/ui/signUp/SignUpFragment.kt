@@ -34,6 +34,19 @@ class SignUpFragment : Fragment() {
         observe()
     }
 
+    private fun initViews() = with(binding) {
+        btnSignUp.setOnClickListener {
+            val email = etInEmail.text.toString()
+            val password = etInPassword.text.toString()
+            val confirmPassword = editTextTextPassword2.text.toString()
+
+            viewModel.signUp(email, password, confirmPassword)
+        }
+        tvSignIn.setOnClickListener {
+            findNavController().navigate(R.id.signUpToSignIn)
+        }
+    }
+
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.error.collect { error: SignUpError ->
@@ -45,27 +58,6 @@ class SignUpFragment : Fragment() {
             viewModel.navigateToSignInScreen.collect {
                 findNavController().navigate(R.id.signUpToSignIn)
             }
-        }
-    }
-
-    private fun initViews() = with(binding) {
-        btnSignUp.setOnClickListener {
-            val email = etInEmail.text.toString()
-            val password = etInPassword.text.toString()
-            val confirmPassword = editTextTextPassword2.text.toString()
-
-            if (password != confirmPassword) {
-                Snackbar.make(
-                    requireView(),
-                    getString(R.string.password_is_not_the_same),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-            viewModel.signUp(email, password, confirmPassword)
-        }
-        tvSignIn.setOnClickListener {
-            findNavController().navigate(R.id.signUpToSignIn)
         }
     }
 }

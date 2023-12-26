@@ -18,20 +18,28 @@ class SplashFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.startTimer {
-            if (isUserLoggedIn()) {
-                findNavController().navigate(R.id.homepageFragment)
-            } else {
-                findNavController().navigate(R.id.signInFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.liveSplashCompleted.observe(viewLifecycleOwner) { splashCompleted ->
+            if (splashCompleted) {
+                if (isUserLoggedIn()) {
+                    findNavController().navigate(R.id.homepageFragment)
+                } else {
+                    findNavController().navigate(R.id.signInFragment)
+                }
             }
         }
+        viewModel.startSplash()
     }
+
     private fun isUserLoggedIn(): Boolean {
         return FirebaseAuth.getInstance().currentUser != null
     }
