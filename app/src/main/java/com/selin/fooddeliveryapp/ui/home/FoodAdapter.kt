@@ -2,6 +2,8 @@ package com.selin.fooddeliveryapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
@@ -9,7 +11,7 @@ import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 class FoodAdapter(
     private var foods: List<FoodListResponse>,
     private val foodCallbacks: FoodCallback
-) : RecyclerView.Adapter<FoodViewHolder>() {
+) : ListAdapter<FoodListResponse,FoodViewHolder>(FoodDiffUtil()) {
 
     interface FoodCallback {
         fun onClickFavoriteButton(food: FoodListResponse)
@@ -20,6 +22,16 @@ class FoodAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val binding = ItemViewHomeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FoodViewHolder(binding, foodCallbacks)
+    }
+
+    class FoodDiffUtil : DiffUtil.ItemCallback<FoodListResponse>() {
+        override fun areItemsTheSame(oldItem: FoodListResponse, newItem: FoodListResponse): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: FoodListResponse, newItem: FoodListResponse): Boolean {
+            return oldItem == newItem
+        }
     }
 
     fun updateData(newData: List<FoodListResponse>) {
