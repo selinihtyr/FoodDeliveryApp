@@ -25,10 +25,13 @@ class EndFragment : Fragment() {
     }
 
     private fun observe() {
+        viewModel.startSplash()
         viewModel.endCompleted.observe(viewLifecycleOwner) {
-            Handler().postDelayed({
-                activity?.finish()
-            }, 2000)
+            if (it) {
+                Handler().postDelayed({
+                    activity?.finish()
+                }, 5000)
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ class DetailViewModel @Inject constructor(private val repo: FoodRepo) : ViewMode
     private val _message = MutableSharedFlow<String>()
     val message: SharedFlow<String> get() = _message
     var quantity = MutableLiveData<Int>()
-    var quantityText = MutableLiveData<Int>()
+    val quantityText = MutableLiveData<Int>()
 
     init {
         quantity.value = 1

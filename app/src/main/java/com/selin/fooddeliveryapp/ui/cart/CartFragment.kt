@@ -71,12 +71,12 @@ class CartFragment : Fragment() {
         }
 
         tbCartIcon.setOnClickListener {
-            updateToggleButtonState(true, false)
+            updateToggleButtonState(isCartSelected = true, isHomeSelected = false)
             navigateToFragment(R.id.cartFragment)
         }
 
         tbHomeCart.setOnClickListener {
-            updateToggleButtonState(false, true)
+            updateToggleButtonState(isCartSelected = false, isHomeSelected = true)
             navigateToFragment(R.id.homepageFragment)
         }
 

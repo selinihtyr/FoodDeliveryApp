@@ -60,7 +60,7 @@ class DetailFragment : Fragment() {
         viewModel.quantity.observe(viewLifecycleOwner) { newQuantity ->
             tvQuantity.text = "$newQuantity"
 
-            val price = arguments?.getString("yemek_fiyat").toSafeInt() ?: 0
+            val price = arguments?.getString("yemek_fiyat").toSafeInt()
             val quantityText = viewModel.quantityText.value ?: 1
             val totalPrice = price * newQuantity * quantityText
 

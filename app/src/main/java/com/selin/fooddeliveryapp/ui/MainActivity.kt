@@ -2,7 +2,6 @@ package com.selin.fooddeliveryapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation
 import com.selin.fooddeliveryapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,6 +1,5 @@
 package com.selin.fooddeliveryapp.ui.end
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,6 @@ class EndViewModel: ViewModel() {
 
     fun startSplash() {
         viewModelScope.launch {
-            delay(2000)
             _endCompleted.postValue(true)
         }
     }

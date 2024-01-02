@@ -1,6 +1,5 @@
 package com.selin.fooddeliveryapp.data.repo
 
-import com.selin.fooddeliveryapp.data.model.response.CRUDResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import com.selin.fooddeliveryapp.data.remote.FoodApi
