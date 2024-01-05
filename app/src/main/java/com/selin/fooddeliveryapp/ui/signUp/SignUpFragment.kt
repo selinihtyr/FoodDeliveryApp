@@ -10,13 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.databinding.SignUpBinding
+import com.selin.fooddeliveryapp.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
-    private lateinit var binding: SignUpBinding
+    private lateinit var binding: FragmentSignUpBinding
     private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class SignUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = SignUpBinding.inflate(inflater, container, false)
+        binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
 

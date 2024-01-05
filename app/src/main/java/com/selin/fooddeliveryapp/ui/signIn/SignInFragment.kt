@@ -10,13 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.databinding.SignInBinding
+import com.selin.fooddeliveryapp.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
-    private lateinit var binding: SignInBinding
+    private lateinit var binding: FragmentSignInBinding
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class SignInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = SignInBinding.inflate(inflater, container, false)
+        binding = FragmentSignInBinding.inflate(inflater, container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class SignInFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.navigateScreen.collect {
-                findNavController().navigate(R.id.signInToHomepage)
+                findNavController().navigate(R.id.loadingFragment)
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {

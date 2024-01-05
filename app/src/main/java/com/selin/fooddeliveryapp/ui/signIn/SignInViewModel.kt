@@ -23,7 +23,7 @@ class SignInViewModel @Inject constructor() : ViewModel() {
         val currentUser = auth.currentUser
         val isUserLoggedIn = currentUser != null
         if (isUserLoggedIn) {
-            navigateToHomeScreen()
+            navigateToLoadingScreen()
         }
     }
     fun signIn(email: String, password: String) {
@@ -42,13 +42,13 @@ class SignInViewModel @Inject constructor() : ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    navigateToHomeScreen()
+                    navigateToLoadingScreen()
                 } else {
                     sendError(SignInError.CHECK_INFORMATION)
                 }
             }
     }
-    private fun navigateToHomeScreen() {
+    private fun navigateToLoadingScreen() {
         viewModelScope.launch {
             _navigateScreen.emit(Unit)
         }
