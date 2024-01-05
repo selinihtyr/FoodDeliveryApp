@@ -25,6 +25,9 @@
         <action
             android:id="@+id/homepageToSignIn"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/home_to_fav"
+            app:destination="@id/favoriteFragment" />
     </fragment>
 
     <fragment
@@ -113,5 +116,9 @@
             android:id="@+id/loading_to_home"
             app:destination="@id/homepageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.selin.fooddeliveryapp.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" />
 
 </navigation>

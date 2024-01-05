@@ -42,13 +42,14 @@ class FoodViewHolder(
 
     private fun setLikeClickListener(food: FoodResponse) {
         binding.ibLike.setOnClickListener {
-            foodCallbacks.onClickFavoriteButton(food)
             isFavorite = !isFavorite
             if (isFavorite) {
                 binding.ibLike.setImageResource(R.drawable.red_heart)
             } else {
                 binding.ibLike.setImageResource(R.drawable.like)
             }
+
+            foodCallbacks.onClickFavoriteButton(food, isFavorite)
         }
     }
 

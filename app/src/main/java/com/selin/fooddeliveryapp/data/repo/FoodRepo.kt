@@ -1,10 +1,10 @@
 package com.selin.fooddeliveryapp.data.repo
 
 import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
-import com.selin.fooddeliveryapp.data.room.FavoriteDao
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.data.remote.FoodApi
+import com.selin.fooddeliveryapp.data.room.FavoriteDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -38,25 +38,27 @@ class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
             }
         }
 
-    suspend fun getFoodToFavorite(food: FavoriteFood) {
-        withContext(Dispatchers.IO) {
-            dao.getFoodToFavorite().forEach {
-                if (it.foodName == food.foodName) {
-                    return@withContext
-                }
-            }
+    suspend fun deleteFoodFromCart(cartFoodId: Int, username: String) {
+        service.deleteFoodFromCart(cartFoodId, username)
+    }
+
+    suspend fun getFoodToFavorite(): List<FavoriteFood> {
+        return withContext(Dispatchers.IO) {
+            dao.getFoodToFavorite()
         }
     }
 
-    suspend fun saveFoodToFavorite(favoriteFood: FavoriteFood) {
+    suspend fun saveFoodToFavorite(id: Int, foodName: String, foodImage: String) {
+        val favoriteFood = FavoriteFood(id, foodName, foodImage)
         withContext(Dispatchers.IO) {
             dao.saveFoodToCart(favoriteFood)
         }
     }
 
-    suspend fun deleteFoodToFavorite(favoriteFood: FavoriteFood) {
+    suspend fun deleteFoodFromFavorite(id: Int) = withContext(Dispatchers.IO) {
+        val favoriteFood = FavoriteFood(id, "", "")
         withContext(Dispatchers.IO) {
-            dao.deleteFoodToFavorite(favoriteFood)
+            dao.deleteFoodFromFavorite(favoriteFood)
         }
     }
 }

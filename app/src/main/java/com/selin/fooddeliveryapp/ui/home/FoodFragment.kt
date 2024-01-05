@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -25,9 +24,8 @@ import kotlinx.coroutines.launch
 class HomePageFragment : Fragment() {
     private lateinit var binding: FragmentHomepageBinding
     private lateinit var adapter: FoodAdapter
-    private var isCartSelected = false
-    private var isHomeSelected = false
-    private val viewModel: HomePageViewModel by viewModels()
+    private val viewModel: FoodViewModel by viewModels()
+    private lateinit var getFoods: FoodResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +46,13 @@ class HomePageFragment : Fragment() {
         adapter = FoodAdapter(
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
-                override fun onClickFavoriteButton(food: FoodResponse) {
-
+                override fun onClickFavoriteButton(food: FoodResponse, isFavorite: Boolean) {
+                    if (isFavorite) {
+                        viewModel.saveFoodToFavorite(food)
+                        Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 override fun onClickDetail(food: FoodResponse) {
@@ -64,8 +67,6 @@ class HomePageFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
-        tbCartHome.setOnClickListener { toggleCartSelection() }
-        tbHomeHome.setOnClickListener { toggleHomeSelection() }
         ibMap.setOnClickListener { navigateToMapFragment() }
         ibLogout.setOnClickListener {
             viewModel.onLogoutClicked()
@@ -115,23 +116,7 @@ class HomePageFragment : Fragment() {
         alertDialog.show()
     }
 
-    private fun toggleCartSelection() {
-        isCartSelected = !isCartSelected
-        updateToggleButtonState(binding.tbCartHome, isCartSelected)
-        findNavController().navigate(R.id.cartFragment)
-    }
-
-    private fun toggleHomeSelection() {
-        isHomeSelected = !isHomeSelected
-        updateToggleButtonState(binding.tbHomeHome, isHomeSelected)
-        findNavController().navigate(R.id.homepageFragment)
-    }
-
     private fun navigateToMapFragment() {
         findNavController().navigate(R.id.mapFragment)
-    }
-
-    private fun updateToggleButtonState(button: Button, isSelected: Boolean) {
-        button.setBackgroundResource(if (isSelected) R.drawable.tbutton_background else R.drawable.tbutton_background)
     }
 }

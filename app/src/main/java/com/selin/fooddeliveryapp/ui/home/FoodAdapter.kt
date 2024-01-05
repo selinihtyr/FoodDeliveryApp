@@ -13,7 +13,7 @@ class FoodAdapter(
 ) : ListAdapter<FoodResponse,FoodViewHolder>(FoodDiffUtil()) {
 
     interface FoodCallback {
-        fun onClickFavoriteButton(food: FoodResponse)
+        fun onClickFavoriteButton(food: FoodResponse, isFavorite: Boolean)
         fun onClickDetail(food: FoodResponse)
         fun onClickAddToCart(food: FoodResponse)
     }

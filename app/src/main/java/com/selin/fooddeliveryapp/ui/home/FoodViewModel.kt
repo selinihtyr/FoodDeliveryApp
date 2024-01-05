@@ -8,7 +8,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.data.model.local.Credentials
-import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import com.selin.fooddeliveryapp.data.remote.FoodApi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomePageViewModel @Inject constructor(
+class FoodViewModel @Inject constructor(
     private val repository: FoodRepo,
     private val api: FoodApi
 ) : ViewModel() {
@@ -69,12 +68,6 @@ class HomePageViewModel @Inject constructor(
         _list.value = filteredResults
     }
 
-    fun saveFavoriteFood(favoriteFood: FavoriteFood) {
-        viewModelScope.launch {
-            repository.saveFoodToFavorite(favoriteFood.foodId, favoriteFood.foodName, favoriteFood.foodImageUrl)
-        }
-    }
-
     fun onLogoutClicked() {
         _showLogoutConfirmationDialog.value = true
     }
@@ -85,5 +78,11 @@ class HomePageViewModel @Inject constructor(
 
     fun logout() {
         Firebase.auth.signOut()
+    }
+
+    fun saveFoodToFavorite(food: FoodResponse) {
+        viewModelScope.launch {
+            repository.saveFoodToFavorite(food.id, food.name, food.imageName)
+        }
     }
 }
