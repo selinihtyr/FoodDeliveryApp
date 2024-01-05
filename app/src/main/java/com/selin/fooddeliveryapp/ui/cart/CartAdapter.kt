@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
 
 class CartAdapter(
-    private var list: List<FoodCartListResponse>,
+    private var list: List<FoodCartResponse>,
     private val cartCallback: CartCallback
-) : ListAdapter<FoodCartListResponse,CartViewHolder>(CartDiffUtil()) {
+) : ListAdapter<FoodCartResponse,CartViewHolder>(CartDiffUtil()) {
 
     interface CartCallback {
-        fun onClickDelete(cart: FoodCartListResponse)
+        fun onClickDelete(cart: FoodCartResponse)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -21,17 +21,17 @@ class CartAdapter(
         return CartViewHolder(binding, cartCallback)
     }
 
-    class CartDiffUtil : DiffUtil.ItemCallback<FoodCartListResponse>() {
-        override fun areItemsTheSame(oldItem: FoodCartListResponse, newItem: FoodCartListResponse): Boolean {
+    class CartDiffUtil : DiffUtil.ItemCallback<FoodCartResponse>() {
+        override fun areItemsTheSame(oldItem: FoodCartResponse, newItem: FoodCartResponse): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: FoodCartListResponse, newItem: FoodCartListResponse): Boolean {
+        override fun areContentsTheSame(oldItem: FoodCartResponse, newItem: FoodCartResponse): Boolean {
             return oldItem == newItem
         }
     }
 
-    fun updateData(newData: List<FoodCartListResponse>) {
+    fun updateData(newData: List<FoodCartResponse>) {
         list = newData
         notifyDataSetChanged()
     }

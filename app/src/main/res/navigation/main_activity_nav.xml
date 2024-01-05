@@ -11,18 +11,22 @@
         android:label="fragment_homepage"
         tools:layout="@layout/fragment_homepage" >
         <action
-            android:id="@+id/transitationDetail"
+            android:id="@+id/action_home_to_detail"
             app:destination="@id/detailFragment" />
+
         <action
             android:id="@+id/transitationCart"
             app:destination="@id/cartFragment" />
+
         <action
             android:id="@+id/transitationMap"
             app:destination="@id/mapFragment" />
+
         <action
             android:id="@+id/homepageToSignIn"
             app:destination="@id/signInFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.selin.fooddeliveryapp.ui.detail.DetailFragment"
@@ -32,6 +36,7 @@
             android:id="@+id/detailFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.selin.fooddeliveryapp.ui.cart.CartFragment"
@@ -40,6 +45,7 @@
             android:id="@+id/transitationEnd"
             app:destination="@id/endFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.selin.fooddeliveryapp.ui.splash.SplashFragment"
@@ -51,32 +57,46 @@
         <action
             android:id="@+id/splashToSignIn"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_splashFragment_self"
+            app:destination="@id/splashFragment" />
+        <action
+            android:id="@+id/splash_to_loading"
+            app:destination="@id/loadingFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.selin.fooddeliveryapp.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
+
         <action
             android:id="@+id/mapFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/endFragment"
         android:name="com.selin.fooddeliveryapp.ui.end.EndFragment"
         android:label="fragment_end"
         tools:layout="@layout/fragment_end" />
+
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.selin.fooddeliveryapp.ui.signIn.SignInFragment"
         android:label="SignInFragment" >
+
         <action
             android:id="@+id/signInToSignUp"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/signInToHomepage"
-            app:destination="@id/homepageFragment" />
+            android:id="@+id/sign_in_to_loading"
+            app:destination="@id/loadingFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.selin.fooddeliveryapp.ui.signUp.SignUpFragment"
@@ -85,4 +105,13 @@
             android:id="@+id/signUpToSignIn"
             app:destination="@id/signInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.selin.fooddeliveryapp.ui.loading.LoadingFragment"
+        android:label="LoadingFragment" >
+        <action
+            android:id="@+id/loading_to_home"
+            app:destination="@id/homepageFragment" />
+    </fragment>
+
 </navigation>

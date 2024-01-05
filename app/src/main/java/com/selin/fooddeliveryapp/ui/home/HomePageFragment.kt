@@ -1,20 +1,22 @@
 package com.selin.fooddeliveryapp.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
+import com.selin.fooddeliveryapp.ui.detail.DetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -46,20 +48,16 @@ class HomePageFragment : Fragment() {
         adapter = FoodAdapter(
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
-                override fun onClickFavoriteButton(food: FoodListResponse) {
+                override fun onClickFavoriteButton(food: FoodResponse) {
 
                 }
 
-                override fun onClickDetail(food: FoodListResponse) {
-                    val bundle = Bundle().apply {
-                        putString("yemek_adi", food.name)
-                        putString("yemek_fiyat", food.price)
-                        putString("yemek_resim_adi", food.imageName)
-                    }
-                    findNavController().navigate(R.id.transitationDetail, bundle)
+                override fun onClickDetail(food: FoodResponse) {
+                    val bundle = Bundle().apply { putParcelable(DetailFragment.KEY_FOOD, food) }
+                    findNavController().navigate(R.id.action_home_to_detail, bundle)
                 }
 
-                override fun onClickAddToCart(food: FoodListResponse) {
+                override fun onClickAddToCart(food: FoodResponse) {
                     viewModel.addToCart(food)
                 }
             })
@@ -70,26 +68,15 @@ class HomePageFragment : Fragment() {
         tbHomeHome.setOnClickListener { toggleHomeSelection() }
         ibMap.setOnClickListener { navigateToMapFragment() }
         ibLogout.setOnClickListener {
-            viewModel.logout()
-            findNavController().navigate(R.id.homepageToSignIn)
+            viewModel.onLogoutClicked()
         }
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchFoods(newText.orEmpty())
-                return true
-            }
-        })
-
+        etSearch.addTextChangedListener {
+            viewModel.searchFoods(it.toString())
+        }
         rvHome.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         rvHome.adapter = adapter
     }
-
     private fun observe() {
         viewModel._list.observe(viewLifecycleOwner) { foods ->
             adapter.updateData(foods)
@@ -100,6 +87,32 @@ class HomePageFragment : Fragment() {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
         }
+
+        viewModel.showLogoutConfirmationDialog.observe(viewLifecycleOwner) { shouldShowDialog ->
+            if (shouldShowDialog) {
+                showLogoutConfirmationDialog()
+                viewModel.onLogoutConfirmationShown()
+            }
+        }
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.apply {
+            setTitle("Logout")
+            setMessage("Are you sure you want to logout?")
+            setPositiveButton("Yes") { _, _ ->
+                viewModel.logout()
+                findNavController().navigate(R.id.homepageToSignIn)
+            }
+            setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            setCancelable(true)
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     private fun toggleCartSelection() {

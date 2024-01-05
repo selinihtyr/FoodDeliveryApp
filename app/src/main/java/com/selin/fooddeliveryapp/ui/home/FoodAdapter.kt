@@ -4,18 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodAdapter(
-    private var foods: List<FoodListResponse>,
+    private var foods: List<FoodResponse>,
     private val foodCallbacks: FoodCallback
-) : ListAdapter<FoodListResponse,FoodViewHolder>(FoodDiffUtil()) {
+) : ListAdapter<FoodResponse,FoodViewHolder>(FoodDiffUtil()) {
 
     interface FoodCallback {
-        fun onClickFavoriteButton(food: FoodListResponse)
-        fun onClickDetail(food: FoodListResponse)
-        fun onClickAddToCart(food: FoodListResponse)
+        fun onClickFavoriteButton(food: FoodResponse)
+        fun onClickDetail(food: FoodResponse)
+        fun onClickAddToCart(food: FoodResponse)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
@@ -23,17 +23,17 @@ class FoodAdapter(
         return FoodViewHolder(binding, foodCallbacks)
     }
 
-    class FoodDiffUtil : DiffUtil.ItemCallback<FoodListResponse>() {
-        override fun areItemsTheSame(oldItem: FoodListResponse, newItem: FoodListResponse): Boolean {
+    class FoodDiffUtil : DiffUtil.ItemCallback<FoodResponse>() {
+        override fun areItemsTheSame(oldItem: FoodResponse, newItem: FoodResponse): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: FoodListResponse, newItem: FoodListResponse): Boolean {
+        override fun areContentsTheSame(oldItem: FoodResponse, newItem: FoodResponse): Boolean {
             return oldItem == newItem
         }
     }
 
-    fun updateData(newData: List<FoodListResponse>) {
+    fun updateData(newData: List<FoodResponse>) {
         foods = newData
         notifyDataSetChanged()
     }

@@ -3,7 +3,7 @@ package com.selin.fooddeliveryapp.ui.cart
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val foodRepo: FoodRepo
 ) : ViewModel() {
-    val list = MutableLiveData<List<FoodCartListResponse>>()
+    val list = MutableLiveData<List<FoodCartResponse>>()
     val totalPrice = MutableLiveData<Int>()
 
     fun getCartList() {

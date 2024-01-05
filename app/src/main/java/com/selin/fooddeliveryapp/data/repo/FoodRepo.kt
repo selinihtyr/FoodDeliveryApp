@@ -1,13 +1,15 @@
 package com.selin.fooddeliveryapp.data.repo
 
-import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
-import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
+import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
+import com.selin.fooddeliveryapp.data.room.FavoriteDao
+import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.data.remote.FoodApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FoodRepo(private val service: FoodApi) {
-    suspend fun getAllFoods(): List<FoodListResponse> = withContext(Dispatchers.IO) {
+class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
+    suspend fun getAllFoods(): List<FoodResponse> = withContext(Dispatchers.IO) {
         return@withContext service.getAllFoods().foods
     }
 
@@ -21,7 +23,7 @@ class FoodRepo(private val service: FoodApi) {
         return@withContext service.addFoodToCart(name, imageName, price, orderQuantity, username)
     }
 
-    suspend fun getCartFoods(username: String): List<FoodCartListResponse> =
+    suspend fun getCartFoods(username: String): List<FoodCartResponse> =
         withContext(Dispatchers.IO) {
             try {
                 val call = service.getCartFoods(username)
@@ -36,7 +38,25 @@ class FoodRepo(private val service: FoodApi) {
             }
         }
 
-    suspend fun deleteFoodFromCart(cartFoodId: Int, username: String) {
-        service.deleteFoodFromCart(cartFoodId, username)
+    suspend fun getFoodToFavorite(food: FavoriteFood) {
+        withContext(Dispatchers.IO) {
+            dao.getFoodToFavorite().forEach {
+                if (it.foodName == food.foodName) {
+                    return@withContext
+                }
+            }
+        }
+    }
+
+    suspend fun saveFoodToFavorite(favoriteFood: FavoriteFood) {
+        withContext(Dispatchers.IO) {
+            dao.saveFoodToCart(favoriteFood)
+        }
+    }
+
+    suspend fun deleteFoodToFavorite(favoriteFood: FavoriteFood) {
+        withContext(Dispatchers.IO) {
+            dao.deleteFoodToFavorite(favoriteFood)
+        }
     }
 }

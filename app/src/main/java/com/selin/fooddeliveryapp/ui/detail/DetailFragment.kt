@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.local.Credentials.Companion.username
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentDetailBinding
 import com.selin.fooddeliveryapp.utils.loadImage
 import com.selin.fooddeliveryapp.utils.toSafeInt
@@ -18,8 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
+
     private lateinit var binding: FragmentDetailBinding
+
     private val viewModel: DetailViewModel by viewModels()
+
+    private lateinit var food: FoodResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,18 +36,20 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initVariables()
         initViews()
         observe()
     }
 
+    private fun initVariables() {
+        food = requireArguments().getParcelable(KEY_FOOD)!!
+    }
+
     private fun initViews() = with(binding) {
-        val name = arguments?.getString("yemek_adi")
-        val price = arguments?.getString("yemek_fiyat")
-        val image = arguments?.getString("yemek_resim_adi")
-        displayFoodDetails(name = name, price = price, image = image)
+        displayFoodDetails(food)
         tbCartDetail.setOnClickListener { findNavController().navigate(R.id.detailFragment_to_cartFragment) }
         tbHomeDetail.setOnClickListener { findNavController().navigate(R.id.homepageFragment) }
-        ivBack.setOnClickListener { view?.let { findNavController().popBackStack() } }
+        ivBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun observe() = with(binding) {
@@ -57,37 +64,36 @@ class DetailFragment : Fragment() {
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
             }
         }
+
         viewModel.quantity.observe(viewLifecycleOwner) { newQuantity ->
             tvQuantity.text = "$newQuantity"
-
-            val price = arguments?.getString("yemek_fiyat").toSafeInt()
             val quantityText = viewModel.quantityText.value ?: 1
-            val totalPrice = price * newQuantity * quantityText
-
+            val totalPrice = food.price.toSafeInt() * newQuantity * quantityText
             tvPrice.text = getString(R.string.price, totalPrice.toString())
         }
     }
 
-    private fun displayFoodDetails(name: String?, price: String?, image: String?) = with(binding) {
-        if (image != null) {
-            val photo = "http://kasimadalan.pe.hu/yemekler/resimler/$image"
-            binding.ivFoodImage.loadImage(imageUrl = photo)
-        }
-        tvFoodName.text = name
-
-        if (price != null) {
-            val quantityText = viewModel.quantityText.value ?: 1
-            val totalPrice = price.toSafeInt() * viewModel.quantity.value!! * quantityText
-            tvPrice.text = getString(R.string.price, totalPrice.toString())
-        }
+    private fun displayFoodDetails(food: FoodResponse) = with(binding) {
+        val photo = "http://kasimadalan.pe.hu/yemekler/resimler/${food.imageName}"
+        binding.ivFoodImage.loadImage(imageUrl = photo)
+        tvFoodName.text = food.name
+        val quantityText = viewModel.quantityText.value ?: 1
+        val totalPrice = food.price.toSafeInt() * viewModel.quantity.value!! * quantityText
+        tvPrice.text = getString(R.string.price, totalPrice.toString())
     }
 
     private fun addToCart() {
         val quantity = viewModel.quantity.value ?: 1
-        val name = arguments?.getString("yemek_adi")
-        val image = arguments?.getString("yemek_resim_adi")
-        val price = arguments?.getString("yemek_fiyat").toSafeInt()
-        viewModel.addToCart(name!!, image!!, price, quantity, username)
+        viewModel.addToCart(
+            food = food,
+            orderQuantity = quantity,
+            username = username
+        )
         findNavController().navigate(R.id.detailFragment_to_cartFragment)
     }
+
+    companion object {
+        const val KEY_FOOD = "key_food"
+    }
+
 }

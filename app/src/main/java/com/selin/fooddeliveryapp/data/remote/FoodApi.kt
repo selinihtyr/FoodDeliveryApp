@@ -1,8 +1,8 @@
 package com.selin.fooddeliveryapp.data.remote
 
 import com.selin.fooddeliveryapp.data.model.response.CRUDResponse
-import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
-import com.selin.fooddeliveryapp.data.model.response.FoodResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -11,7 +11,7 @@ import retrofit2.http.POST
 
 interface FoodApi {
     @GET("yemekler/tumYemekleriGetir.php")
-    suspend fun getAllFoods(): FoodResponse
+    suspend fun getAllFoods(): FoodListResponse
 
 
     @POST("yemekler/sepeteYemekEkle.php")
@@ -26,7 +26,7 @@ interface FoodApi {
 
     @POST("yemekler/sepettekiYemekleriGetir.php")
     @FormUrlEncoded
-    fun getCartFoods(@Field("kullanici_adi") username: String): Call<FoodCartResponse>
+    fun getCartFoods(@Field("kullanici_adi") username: String): Call<FoodCartListResponse>
 
 
     @POST("yemekler/sepettenYemekSil.php")

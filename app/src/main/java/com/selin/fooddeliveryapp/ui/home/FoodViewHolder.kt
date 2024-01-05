@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.model.response.FoodListResponse
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodViewHolder(
@@ -13,7 +13,7 @@ class FoodViewHolder(
     private var isFavorite: Boolean = false
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(food: FoodListResponse) {
+    fun bind(food: FoodResponse) {
         val context = binding.root.context
         binding.tvFoodName.text = food.name
         setupFoodInfo(context = context, foodPrice = food.price)
@@ -28,19 +28,19 @@ class FoodViewHolder(
         binding.tvPrice.text = priceText
     }
 
-    private fun setAddToCartListener(food: FoodListResponse) {
+    private fun setAddToCartListener(food: FoodResponse) {
         binding.ibAdd.setOnClickListener {
             foodCallbacks.onClickAddToCart(food)
         }
     }
 
-    private fun setDetailClickListener(food: FoodListResponse) {
+    private fun setDetailClickListener(food: FoodResponse) {
         binding.ivFoodImage.setOnClickListener {
             foodCallbacks.onClickDetail(food)
         }
     }
 
-    private fun setLikeClickListener(food: FoodListResponse) {
+    private fun setLikeClickListener(food: FoodResponse) {
         binding.ibLike.setOnClickListener {
             foodCallbacks.onClickFavoriteButton(food)
             isFavorite = !isFavorite
@@ -52,7 +52,7 @@ class FoodViewHolder(
         }
     }
 
-    private fun loadImage(context: Context, food: FoodListResponse) {
+    private fun loadImage(context: Context, food: FoodResponse) {
         val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.imageName}"
         Glide.with(context)
             .load(imageUrl)

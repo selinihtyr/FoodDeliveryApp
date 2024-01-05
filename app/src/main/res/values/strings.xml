@@ -29,4 +29,7 @@
     <string name="verification_email_error">Your information does not match, or you did not register.</string>
     <string name="this_mail_is_in_use">This mail is in use.</string>
 
+    <string name="hint_home_screen_search_box">Search food</string>
+
+
 </resources>

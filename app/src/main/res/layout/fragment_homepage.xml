@@ -56,19 +56,29 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="356dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilSearch"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
-        android:background="#0D121111"
-        android:queryHint="Search"
-        android:scrollbarStyle="outsideInset"
+        app:endIconDrawable="@drawable/ic_baseline_close_24"
+        android:hint="@string/hint_home_screen_search_box"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDeliciousFoodForYou">
 
-    </SearchView>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
@@ -82,7 +92,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tbCartHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/tilSearch" />
 
     <ImageButton
         android:id="@+id/ibMap"
