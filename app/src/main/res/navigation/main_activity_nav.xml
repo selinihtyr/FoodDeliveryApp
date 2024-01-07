@@ -50,25 +50,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.selin.fooddeliveryapp.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/transitationHome"
-            app:destination="@id/homepageFragment" />
-        <action
-            android:id="@+id/splashToSignIn"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_splashFragment_self"
-            app:destination="@id/splashFragment" />
-        <action
-            android:id="@+id/splash_to_loading"
-            app:destination="@id/loadingFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/mapFragment"
         android:name="com.selin.fooddeliveryapp.ui.map.MapFragment"
         android:label="fragment_map"
@@ -94,9 +75,6 @@
         <action
             android:id="@+id/signInToSignUp"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/sign_in_to_loading"
-            app:destination="@id/loadingFragment" />
 
     </fragment>
 
@@ -109,16 +87,27 @@
             app:destination="@id/signInFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loadingFragment"
-        android:name="com.selin.fooddeliveryapp.ui.loading.LoadingFragment"
-        android:label="LoadingFragment" >
-        <action
-            android:id="@+id/loading_to_home"
-            app:destination="@id/homepageFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.selin.fooddeliveryapp.ui.favorite.FavoriteFragment"
         android:label="FavoriteFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.selin.fooddeliveryapp.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/splash_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homepageFragment"
+            app:destination="@id/homepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.selin.fooddeliveryapp.ui.onboarding.OnBoardingFragment"
+        android:label="OnBoardingFragment" >
+        <action
+            android:id="@+id/action_onBoardingFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 
 </navigation>

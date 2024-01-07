@@ -9,9 +9,9 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/avSignIn"
-        android:layout_width="266dp"
-        android:layout_height="241dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="0dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="160dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,57 +22,4 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/animation_lnhmlbrh" />
 
-    <TextView
-        android:id="@+id/tvFoodDelivery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/food_delivery"
-        android:textColor="#2E3542"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avSignIn" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/all_the_delicious_food_on_you_phone"
-        android:textColor="#2E3542"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFoodDelivery" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/if_you_re_hungry_start"
-        android:textColor="#2E3542"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/avSplashLoading"
-        android:layout_width="265dp"
-        android:layout_height="107dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintWidth_percent="0.4"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loading" />
 </androidx.constraintlayout.widget.ConstraintLayout>

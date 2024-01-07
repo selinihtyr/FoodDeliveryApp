@@ -1,5 +1,6 @@
 package com.selin.fooddeliveryapp.ui.splash
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding
     private val viewModel: SplashViewModel by viewModels()
@@ -28,19 +30,18 @@ class SplashFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.liveSplashCompleted.observe(viewLifecycleOwner) { splashCompleted ->
-            if (splashCompleted) {
-                if (isUserLoggedIn()) {
-                    findNavController().navigate(R.id.homepageFragment)
-                } else {
-                    findNavController().navigate(R.id.signInFragment)
-                }
+        viewModel.startSplash()
+        viewModel.checkUserInfo()
+        viewModel.liveSplashCompleted.observe(viewLifecycleOwner) { completed ->
+            if (completed) {
+                val destination = viewModel.navigateToDestination(onBoardingFinished())
+                findNavController().navigate(destination)
             }
         }
-        viewModel.startSplash()
     }
 
-    private fun isUserLoggedIn(): Boolean {
-        return FirebaseAuth.getInstance().currentUser != null
+    private fun onBoardingFinished(): Boolean {
+        val sharedPref = activity?.getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharedPref?.getBoolean("Finished", false) ?: false
     }
 }
