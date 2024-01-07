@@ -41,12 +41,6 @@ class SignInFragment : Fragment() {
 
     private fun observe() = with(binding) {
         viewModel.checkUserInfo()
-
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.navigateScreen.collect {
-                findNavController().navigate(R.id.loadingFragment)
-            }
-        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.error.collect { error: SignInError ->
                 val stringResourceId = SignInError.toStringResource(error)

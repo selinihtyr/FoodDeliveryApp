@@ -13,8 +13,7 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor() : ViewModel() {
     private val auth = FirebaseAuth.getInstance()
 
-    private val _navigateScreen = MutableSharedFlow<Unit>()
-    val navigateScreen: SharedFlow<Unit> get() = _navigateScreen
+    private val navigateScreen = MutableSharedFlow<Unit>()
 
     private val _error = MutableSharedFlow<SignInError>()
     val error: SharedFlow<SignInError> get() = _error
@@ -50,7 +49,7 @@ class SignInViewModel @Inject constructor() : ViewModel() {
     }
     private fun navigateToLoadingScreen() {
         viewModelScope.launch {
-            _navigateScreen.emit(Unit)
+            navigateScreen.emit(Unit)
         }
     }
     private fun sendError(error: SignInError) {

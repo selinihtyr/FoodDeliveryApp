@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FoodDeliveryApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.FoodDeliveryApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimaryVariant">@color/tbColor</item>
+    </style>
+
+    <style name="CustomButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/button</item>
     </style>
 
     <style name="Theme.FoodDeliveryApp" parent="Base.Theme.FoodDeliveryApp" />z

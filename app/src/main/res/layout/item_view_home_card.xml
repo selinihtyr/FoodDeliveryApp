@@ -49,7 +49,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginTop="170dp"
             android:gravity="center|center_horizontal"
-            android:text="Food Name"
+            android:text="@string/food_name"
             android:textAlignment="center"
             android:textColor="#494848"
             android:textSize="24sp"
@@ -62,7 +62,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginTop="255dp"
             android:gravity="left"
-            android:text="30"
+            android:text="0"
             android:textColor="#333233"
             android:textSize="24sp" />
 

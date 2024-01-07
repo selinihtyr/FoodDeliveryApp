@@ -8,5 +8,6 @@
     <color name="yellow_star">#FFDD45</color>
     <color name="grey_star">#FFC4C4C4</color>
     <color name="gray_200">#0D121111</color>
+    <color name="button">#AF213C</color>
 
 </resources>

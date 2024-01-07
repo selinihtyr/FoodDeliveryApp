@@ -34,18 +34,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initViews() {
-        with(binding) {
-            tbCartMap.setOnClickListener {
-                viewModel.toggleCartSelected()
-                viewModel.updateToggleButtonState(tbCartMap, viewModel.isCartSelected)
-                findNavController().navigate(R.id.mapFragment_to_cartFragment)
-            }
-
-            tbHomeMap.setOnClickListener {
-                viewModel.toggleHomeSelected()
-                viewModel.updateToggleButtonState(tbHomeMap, viewModel.isHomeSelected)
-                activity?.supportFragmentManager?.popBackStack()
-            }
+        binding.ibBackMap.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

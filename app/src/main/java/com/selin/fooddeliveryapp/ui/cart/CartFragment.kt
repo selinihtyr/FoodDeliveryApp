@@ -22,9 +22,6 @@ class CartFragment : Fragment() {
 
     private val viewModel: CartViewModel by viewModels()
 
-    private var isCartSelected = false
-    private var isHomeSelected = false
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,16 +67,6 @@ class CartFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        tbCartIcon.setOnClickListener {
-            updateToggleButtonState(isCartSelected = true, isHomeSelected = false)
-            navigateToFragment(R.id.cartFragment)
-        }
-
-        tbHomeCart.setOnClickListener {
-            updateToggleButtonState(isCartSelected = false, isHomeSelected = true)
-            navigateToFragment(R.id.homepageFragment)
-        }
-
         rvCart.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         rvCart.adapter = adapter
@@ -95,20 +82,5 @@ class CartFragment : Fragment() {
         }
 
         viewModel.getCartList()
-    }
-
-    private fun updateToggleButtonState(isCartSelected: Boolean, isHomeSelected: Boolean) {
-        this.isCartSelected = isCartSelected
-        this.isHomeSelected = isHomeSelected
-        updateButtonBackground(binding.tbCartIcon, isCartSelected)
-        updateButtonBackground(binding.tbHomeCart, isHomeSelected)
-    }
-
-    private fun updateButtonBackground(view: View, isSelected: Boolean) {
-        view.setBackgroundResource(if (isSelected) R.drawable.tbutton_background else R.drawable.tbutton_background)
-    }
-
-    private fun navigateToFragment(destination: Int) {
-        Navigation.findNavController(binding.btnConfirmCart).navigate(destination)
     }
 }

@@ -47,8 +47,6 @@ class DetailFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         displayFoodDetails(food)
-        tbCartDetail.setOnClickListener { findNavController().navigate(R.id.detailFragment_to_cartFragment) }
-        tbHomeDetail.setOnClickListener { findNavController().navigate(R.id.homepageFragment) }
         ivBack.setOnClickListener { findNavController().popBackStack() }
     }
 
@@ -95,5 +93,4 @@ class DetailFragment : Fragment() {
     companion object {
         const val KEY_FOOD = "key_food"
     }
-
 }
