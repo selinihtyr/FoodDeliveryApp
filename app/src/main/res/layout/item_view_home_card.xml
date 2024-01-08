@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#FFFFFF"
     android:orientation="horizontal">
 
 
@@ -14,16 +15,8 @@
         android:layout_height="300dp"
         android:layout_margin="10dp"
         android:background="#FFFFFF"
-        app:cardCornerRadius="50dp">
-
-        <ImageButton
-            android:id="@+id/ibLike"
-            android:layout_width="35dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="9dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/like" />
+        app:cardCornerRadius="50dp"
+        app:cardElevation="6dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewFoodImage"

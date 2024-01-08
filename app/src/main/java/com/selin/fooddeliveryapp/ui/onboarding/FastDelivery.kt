@@ -27,7 +27,7 @@ class FastDelivery : Fragment() {
     }
 
     private fun initViews() {
-        binding.btnNextFastDelivery.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
             viewPager?.currentItem = 2
         }

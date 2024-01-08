@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0C000000"
+    android:background="#FFFFFF"
     tools:context=".ui.cart.CartFragment">
 
     <ImageButton
@@ -38,12 +38,10 @@
         android:id="@+id/rvCart"
         android:layout_width="0dp"
         android:layout_height="470dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:padding="20dp"
-        android:paddingBottom="50dp"
+        android:layout_marginBottom="8dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotalCart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ibBack" />
 

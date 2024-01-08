@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0C000000">
+    android:background="#FFFFFF">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/avEasyPayment"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/animation_three"/>
+        app:lottie_rawRes="@raw/animation_three" />
 
     <Button
         android:id="@+id/btnFinish"

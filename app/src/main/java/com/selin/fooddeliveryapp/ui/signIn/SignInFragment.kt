@@ -1,6 +1,7 @@
 package com.selin.fooddeliveryapp.ui.signIn
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,10 +48,22 @@ class SignInFragment : Fragment() {
                 Snackbar.make(requireView(), stringResourceId, Snackbar.LENGTH_SHORT).show()
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.navigateScreen.collect {
+                findNavController().navigate(R.id.homepageFragment)
+                Log.d("SignInFragment", "Navigating to homepage")
+
+            }
+        }
         btnSignIn.setOnClickListener {
             val email = etInEmail.text.toString()
             val password = etInPassword.text.toString()
             viewModel.signIn(email, password)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observe()
     }
 }
