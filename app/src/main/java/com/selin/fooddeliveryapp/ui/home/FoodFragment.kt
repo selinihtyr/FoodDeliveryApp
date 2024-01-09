@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,8 +26,6 @@ class HomePageFragment : Fragment() {
     private lateinit var binding: FragmentHomepageBinding
     private lateinit var adapter: FoodAdapter
     private val viewModel: FoodViewModel by viewModels()
-    private lateinit var getFoods: FoodResponse
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,15 +45,6 @@ class HomePageFragment : Fragment() {
         adapter = FoodAdapter(
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
-                override fun onClickFavoriteButton(food: FoodResponse, isFavorite: Boolean) {
-                    if (isFavorite) {
-                        viewModel.saveFoodToFavorite(food)
-                        Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
                 override fun onClickDetail(food: FoodResponse) {
                     val bundle = Bundle().apply { putParcelable(DetailFragment.KEY_FOOD, food) }
                     findNavController().navigate(R.id.action_home_to_detail, bundle)
@@ -63,7 +53,8 @@ class HomePageFragment : Fragment() {
                 override fun onClickAddToCart(food: FoodResponse) {
                     viewModel.addToCart(food)
                 }
-            })
+            }
+        )
     }
 
     private fun initViews() = with(binding) {
@@ -78,8 +69,10 @@ class HomePageFragment : Fragment() {
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         rvHome.adapter = adapter
     }
+
     private fun observe() {
         viewModel._list.observe(viewLifecycleOwner) { foods ->
+            binding.progressBar.isGone = true
             adapter.updateData(foods)
         }
 
@@ -92,7 +85,7 @@ class HomePageFragment : Fragment() {
         viewModel.showLogoutConfirmationDialog.observe(viewLifecycleOwner) { shouldShowDialog ->
             if (shouldShowDialog) {
                 showLogoutConfirmationDialog()
-                viewModel.onLogoutConfirmationShown()
+                viewModel.onLogoutConfirmationShow()
             }
         }
     }

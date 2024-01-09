@@ -9,8 +9,7 @@ import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
 
 class FoodViewHolder(
     val binding: ItemViewHomeCardBinding,
-    private val foodCallbacks: FoodAdapter.FoodCallback,
-    private var isFavorite: Boolean = false
+    private val foodCallbacks: FoodAdapter.FoodCallback
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(food: FoodResponse) {
@@ -19,7 +18,6 @@ class FoodViewHolder(
         setupFoodInfo(context = context, foodPrice = food.price)
         setAddToCartListener(food)
         setDetailClickListener(food)
-        setLikeClickListener(food)
         loadImage(context = context, food = food)
     }
 
@@ -37,19 +35,6 @@ class FoodViewHolder(
     private fun setDetailClickListener(food: FoodResponse) {
         binding.ivFoodImage.setOnClickListener {
             foodCallbacks.onClickDetail(food)
-        }
-    }
-
-    private fun setLikeClickListener(food: FoodResponse) {
-        binding.ibLike.setOnClickListener {
-            isFavorite = !isFavorite
-            if (isFavorite) {
-                binding.ibLike.setImageResource(R.drawable.red_heart)
-            } else {
-                binding.ibLike.setImageResource(R.drawable.like)
-            }
-
-            foodCallbacks.onClickFavoriteButton(food, isFavorite)
         }
     }
 

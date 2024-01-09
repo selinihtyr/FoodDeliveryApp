@@ -6,14 +6,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
     @Query("SELECT * FROM favorites")
-    suspend fun getFoodToFavorite(): List<FavoriteFood>
+    fun getFoodToFavorite(): List<FavoriteFood>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveFoodToCart(favoriteFood: FavoriteFood)
+    suspend fun saveFoodToFavorite(favoriteFood: FavoriteFood)
 
     @Delete
     suspend fun deleteFoodFromFavorite(favoriteFood: FavoriteFood)

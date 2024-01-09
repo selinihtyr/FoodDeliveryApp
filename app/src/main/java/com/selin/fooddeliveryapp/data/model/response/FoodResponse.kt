@@ -9,5 +9,6 @@ data class FoodResponse(
     @SerializedName("yemek_id") var id: Int,
     @SerializedName("yemek_adi") var name: String,
     @SerializedName("yemek_resim_adi") var imageName: String,
-    @SerializedName("yemek_fiyat") var price: String
+    @SerializedName("yemek_fiyat") var price: String,
+    var isFavorite: Boolean
 ) : Parcelable

@@ -13,7 +13,6 @@ class FoodAdapter(
 ) : ListAdapter<FoodResponse,FoodViewHolder>(FoodDiffUtil()) {
 
     interface FoodCallback {
-        fun onClickFavoriteButton(food: FoodResponse, isFavorite: Boolean)
         fun onClickDetail(food: FoodResponse)
         fun onClickAddToCart(food: FoodResponse)
     }
@@ -21,6 +20,11 @@ class FoodAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val binding = ItemViewHomeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FoodViewHolder(binding, foodCallbacks)
+    }
+
+    override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
+        val food = foods[position]
+        holder.bind(food)
     }
 
     class FoodDiffUtil : DiffUtil.ItemCallback<FoodResponse>() {
@@ -39,9 +43,4 @@ class FoodAdapter(
     }
 
     override fun getItemCount(): Int = foods.size
-
-    override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        val food = foods[position]
-        holder.bind(food)
-    }
 }

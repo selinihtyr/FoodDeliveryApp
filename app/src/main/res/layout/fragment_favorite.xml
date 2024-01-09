@@ -2,11 +2,9 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/favoriteFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0C000000">
+    android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/tvFavoriteTitle"
@@ -21,18 +19,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rvFavorite"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="542dp"
+        android:layout_margin="8dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteTitle">
+        app:layout_constraintTop_toBottomOf="@+id/tvFavoriteTitle"
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
 

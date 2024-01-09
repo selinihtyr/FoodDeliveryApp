@@ -11,12 +11,12 @@ class FavoriteViewHolder(
     private var isFavorite: Boolean = false
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(favoriteFood: FavoriteFood) = with(binding){
+    fun bind(favoriteFood: FavoriteFood) = with(binding) {
         val context = binding.root.context
         val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${favoriteFood.foodImage}"
         Glide.with(context).load(imageUrl).override(300, 300).into(ivFoodImage)
         tvFoodName.text = favoriteFood.foodName
-        ibLike.setOnClickListener {
+        ibDontLike.setOnClickListener {
             foodCallbacks.onClickDelete(favoriteFood)
         }
     }

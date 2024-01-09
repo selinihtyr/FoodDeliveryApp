@@ -5,7 +5,7 @@
     android:id="@+id/ConstrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0C000000"
+    android:background="#FFFFFF"
     tools:context=".ui.MainActivity">
 
     <TextView
@@ -29,12 +29,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="24dp"
+        android:elevation="6dp"
         android:hint="@string/hint_home_screen_search_box"
-        app:endIconDrawable="@drawable/ic_baseline_close_24"
+        app:endIconDrawable="@drawable/close"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeliciousFoodForYou">
+        app:layout_constraintTop_toBottomOf="@+id/tvDeliciousFoodForYou"
+        app:startIconDrawable="@drawable/search">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSearch"
@@ -82,5 +84,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

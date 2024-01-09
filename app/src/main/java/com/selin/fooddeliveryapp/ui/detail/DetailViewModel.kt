@@ -51,4 +51,15 @@ class DetailViewModel @Inject constructor(private val repo: FoodRepo) : ViewMode
             quantity.value = currentQuantity - 1
         }
     }
+
+    fun saveFoodToFavorite(id: Int, name:String, imageUrl: String) {
+        viewModelScope.launch {
+            repo.saveFoodToFavorite(id, name, imageUrl)
+        }
+    }
+    fun deleteFoodFromFavorite(food: FoodResponse) {
+        viewModelScope.launch {
+            repo.deleteFoodFromFavorite(food.id)
+        }
+    }
 }

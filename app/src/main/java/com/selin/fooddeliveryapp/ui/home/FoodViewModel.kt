@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.data.model.local.Credentials
-import com.selin.fooddeliveryapp.data.repo.FoodRepo
+import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.data.remote.FoodApi
+import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -72,17 +72,11 @@ class FoodViewModel @Inject constructor(
         _showLogoutConfirmationDialog.value = true
     }
 
-    fun onLogoutConfirmationShown() {
+    fun onLogoutConfirmationShow() {
         _showLogoutConfirmationDialog.value = false
     }
 
     fun logout() {
         Firebase.auth.signOut()
-    }
-
-    fun saveFoodToFavorite(food: FoodResponse) {
-        viewModelScope.launch {
-            repository.saveFoodToFavorite(food.id, food.name, food.imageName)
-        }
     }
 }
