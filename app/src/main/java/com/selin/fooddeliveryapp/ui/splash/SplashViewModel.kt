@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.ui.signIn.SignInError
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-class SplashViewModel (
+
+class SplashViewModel(
 ) : ViewModel() {
     private val _liveSplashCompleted = MutableLiveData<Boolean>()
     val liveSplashCompleted: LiveData<Boolean> get() = _liveSplashCompleted
@@ -46,7 +44,7 @@ class SplashViewModel (
             R.id.homepageFragment
         } else {
             if (onBoardingFinished) {
-                R.id.signInFragment
+                R.id.loginTabFragment
             } else {
                 R.id.splash_to_onBoardingFragment
             }

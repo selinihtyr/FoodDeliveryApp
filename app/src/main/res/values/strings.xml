@@ -43,6 +43,7 @@
     <string name="start">START</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
+    <string name="welcome_to_food_delivery">Welcome to Food Delivery</string>
 
 
 </resources>

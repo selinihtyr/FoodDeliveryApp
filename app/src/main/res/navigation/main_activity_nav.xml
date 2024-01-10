@@ -23,11 +23,11 @@
             app:destination="@id/mapFragment" />
 
         <action
-            android:id="@+id/homepageToSignIn"
-            app:destination="@id/signInFragment" />
-        <action
             android:id="@+id/home_to_fav"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/home_to_login"
+            app:destination="@id/loginTabFragment" />
     </fragment>
 
     <fragment
@@ -68,25 +68,6 @@
         tools:layout="@layout/fragment_end" />
 
     <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.selin.fooddeliveryapp.ui.signIn.SignInFragment"
-        android:label="SignInFragment" >
-
-        <action
-            android:id="@+id/signInToSignUp"
-            app:destination="@id/signUpFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.selin.fooddeliveryapp.ui.signUp.SignUpFragment"
-        android:label="SignUpFragment" >
-        <action
-            android:id="@+id/signUpToSignIn"
-            app:destination="@id/signInFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.selin.fooddeliveryapp.ui.favorite.FavoriteFragment"
         android:label="FavoriteFragment" />
@@ -106,8 +87,12 @@
         android:name="com.selin.fooddeliveryapp.ui.onboarding.OnBoardingFragment"
         android:label="OnBoardingFragment" >
         <action
-            android:id="@+id/action_onBoardingFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            android:id="@+id/loginTab"
+            app:destination="@id/loginTabFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loginTabFragment"
+        android:name="com.selin.fooddeliveryapp.ui.LoginTabFragment"
+        android:label="LoginTabFragment" />
 
 </navigation>

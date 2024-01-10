@@ -29,7 +29,7 @@ class EasyPayment : Fragment() {
 
     private fun initViews() {
         binding.btnFinish.setOnClickListener {
-            findNavController().navigate(R.id.action_onBoardingFragment_to_signInFragment)
+            findNavController().navigate(R.id.loginTabFragment)
             onBoardingFinished()
         }
     }

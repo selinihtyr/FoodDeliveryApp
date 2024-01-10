@@ -7,7 +7,7 @@
     </style>
 
     <style name="CustomButton" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@color/button</item>
+        <item name="backgroundTint">@color/white</item>
     </style>
 
     <style name="Theme.FoodDeliveryApp" parent="Base.Theme.FoodDeliveryApp" />z

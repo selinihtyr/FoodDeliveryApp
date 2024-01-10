@@ -42,9 +42,6 @@ class SignUpFragment : Fragment() {
 
             viewModel.signUp(email, password, confirmPassword)
         }
-        tvSignIn.setOnClickListener {
-            findNavController().navigate(R.id.signUpToSignIn)
-        }
     }
 
     private fun observe() {
@@ -52,11 +49,6 @@ class SignUpFragment : Fragment() {
             viewModel.error.collect { error: SignUpError ->
                 val stringResourceId = SignUpError.toStringResource(error)
                 Snackbar.make(requireView(), stringResourceId, Snackbar.LENGTH_SHORT).show()
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.navigateToSignInScreen.collect {
-                findNavController().navigate(R.id.signUpToSignIn)
             }
         }
     }

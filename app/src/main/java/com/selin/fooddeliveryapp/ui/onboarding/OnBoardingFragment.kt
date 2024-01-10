@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.FragmentOnboardingBinding
 import dagger.hilt.android.AndroidEntryPoint
 

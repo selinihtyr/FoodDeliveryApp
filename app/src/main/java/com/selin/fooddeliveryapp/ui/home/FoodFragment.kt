@@ -97,7 +97,7 @@ class HomePageFragment : Fragment() {
             setMessage("Are you sure you want to logout?")
             setPositiveButton("Yes") { _, _ ->
                 viewModel.logout()
-                findNavController().navigate(R.id.homepageToSignIn)
+                findNavController().navigate(R.id.home_to_login)
             }
             setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()

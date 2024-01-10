@@ -30,14 +30,7 @@ class SignInFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
         observe()
-    }
-
-    private fun initViews() {
-        binding.tvSignUp.setOnClickListener {
-            findNavController().navigate(R.id.signInToSignUp)
-        }
     }
 
     private fun observe() = with(binding) {
