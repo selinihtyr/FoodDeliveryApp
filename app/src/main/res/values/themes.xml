@@ -10,5 +10,7 @@
         <item name="backgroundTint">@color/white</item>
     </style>
 
-    <style name="Theme.FoodDeliveryApp" parent="Base.Theme.FoodDeliveryApp" />z
+    <style name="Theme.FoodDeliveryApp" parent="Base.Theme.FoodDeliveryApp" />
+
+
 </resources>
