@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.data.remote
+package com.selin.fooddeliveryapp.data.source.remote
 
 import com.selin.fooddeliveryapp.data.model.response.CRUDResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodCartListResponse

@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.utils
+package com.selin.fooddeliveryapp.utils.extension
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

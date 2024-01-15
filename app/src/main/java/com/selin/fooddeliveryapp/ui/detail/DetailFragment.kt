@@ -11,11 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.selin.fooddeliveryapp.R
-import com.selin.fooddeliveryapp.data.model.local.Credentials.Companion.username
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentDetailBinding
-import com.selin.fooddeliveryapp.utils.loadImage
-import com.selin.fooddeliveryapp.utils.toSafeInt
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
+import com.selin.fooddeliveryapp.utils.extension.loadImage
+import com.selin.fooddeliveryapp.utils.extension.toSafeInt
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -100,7 +100,7 @@ class DetailFragment : Fragment() {
         viewModel.addToCart(
             food = food,
             orderQuantity = quantity,
-            username = username
+            username = AppConstants.USERNAME
         )
         findNavController().navigate(R.id.detailFragment_to_cartFragment)
     }

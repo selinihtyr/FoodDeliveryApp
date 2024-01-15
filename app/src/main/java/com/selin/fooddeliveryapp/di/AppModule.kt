@@ -1,13 +1,12 @@
 package com.selin.fooddeliveryapp.di
 
 import android.content.Context
-import androidx.room.Dao
 import androidx.room.Room
-import com.selin.fooddeliveryapp.data.room.Database
-import com.selin.fooddeliveryapp.data.room.FavoriteDao
-import com.selin.fooddeliveryapp.data.remote.FoodApi
+import com.selin.fooddeliveryapp.data.source.locale.Database
+import com.selin.fooddeliveryapp.data.source.locale.FavoriteDao
+import com.selin.fooddeliveryapp.data.source.remote.FoodApi
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
-import com.selin.fooddeliveryapp.retrofit.ApiConstants
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +30,7 @@ class AppModule {
     @Singleton
     fun provideFood(): FoodApi {
         return Retrofit.Builder()
-            .baseUrl(ApiConstants.BASE_URL)
+            .baseUrl(AppConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(FoodApi::class.java)

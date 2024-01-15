@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
+import com.selin.fooddeliveryapp.data.model.entity.FavoriteEntity
 import com.selin.fooddeliveryapp.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +40,7 @@ class FavoriteFragment : Fragment() {
         val adapter = FavoriteAdapter(
             favoriteFoods = emptyList(),
             foodCallbacks = object : FavoriteAdapter.FavoriteCallback {
-                override fun onClickDelete(favoriteFood: FavoriteFood) {
+                override fun onClickDelete(favoriteFood: FavoriteEntity) {
                     viewModel.deleteFoodFromFavorite(favoriteFood.id)
                 }
             }
@@ -55,7 +55,7 @@ class FavoriteFragment : Fragment() {
             FavoriteAdapter(
                 favoriteFoods = favoriteFoods,
                 foodCallbacks = object : FavoriteAdapter.FavoriteCallback {
-                    override fun onClickDelete(favoriteFood: FavoriteFood) {
+                    override fun onClickDelete(favoriteFood: FavoriteEntity) {
                         viewModel.deleteFoodFromFavorite(favoriteFood.id)
                     }
                 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
+import com.selin.fooddeliveryapp.data.model.entity.FavoriteEntity
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +17,8 @@ class FavoriteViewModel @Inject constructor(
     private val repo: FoodRepo
 ) : ViewModel() {
 
-    private val list = MutableLiveData<List<FavoriteFood>>()
-    val _list: LiveData<List<FavoriteFood>> = list
+    private val list = MutableLiveData<List<FavoriteEntity>>()
+    val _list: LiveData<List<FavoriteEntity>> = list
 
     fun getAllFavoriteFoods() {
         viewModelScope.launch(Dispatchers.IO) {

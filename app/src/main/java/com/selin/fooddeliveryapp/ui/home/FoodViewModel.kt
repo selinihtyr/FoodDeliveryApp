@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
-import com.selin.fooddeliveryapp.data.remote.FoodApi
+import com.selin.fooddeliveryapp.data.source.remote.FoodApi
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -52,7 +52,7 @@ class FoodViewModel @Inject constructor(
                     food.imageName,
                     food.price.toInt(),
                     1,
-                    Credentials.username
+                    AppConstants.USERNAME
                 )
             if (response.isSuccess) {
                 showMessage.emit("Item added to cart successfully")

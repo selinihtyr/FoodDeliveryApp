@@ -4,8 +4,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
-import com.selin.fooddeliveryapp.utils.Size
-import com.selin.fooddeliveryapp.utils.loadImage
+import com.selin.fooddeliveryapp.utils.extension.Size
+import com.selin.fooddeliveryapp.utils.extension.loadImage
 
 class CartViewHolder(
     val binding: ItemViewCartCardBinding,

@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
-import com.selin.fooddeliveryapp.data.model.local.Credentials
 import com.selin.fooddeliveryapp.data.repo.FoodRepo
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,9 +19,8 @@ class CartViewModel @Inject constructor(
     val totalPrice = MutableLiveData<Int>()
 
     fun getCartList() {
-        val username = Credentials.username
         viewModelScope.launch(Dispatchers.IO) {
-            val cartList = foodRepo.getCartFoods(username)
+            val cartList = foodRepo.getCartFoods(username = AppConstants.USERNAME)
 
             var totalPrice = 0
             for (cartItem in cartList) {

@@ -102,4 +102,7 @@ dependencies {
 
     implementation("com.tbuonomo:dotsindicator:4.3")
 
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+
+
 }

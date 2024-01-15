@@ -1,12 +1,11 @@
 package com.selin.fooddeliveryapp.data.repo
 
-import com.selin.fooddeliveryapp.data.model.local.FavoriteFood
+import com.selin.fooddeliveryapp.data.model.entity.FavoriteEntity
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
-import com.selin.fooddeliveryapp.data.remote.FoodApi
-import com.selin.fooddeliveryapp.data.room.FavoriteDao
+import com.selin.fooddeliveryapp.data.source.remote.FoodApi
+import com.selin.fooddeliveryapp.data.source.locale.FavoriteDao
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
@@ -43,19 +42,19 @@ class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
         service.deleteFoodFromCart(cartFoodId, username)
     }
 
-    fun getFoodToFavorite(): List<FavoriteFood> {
+    fun getFoodToFavorite(): List<FavoriteEntity> {
         return dao.getFoodToFavorite()
     }
 
     suspend fun saveFoodToFavorite(id: Int, foodName: String, foodImage: String) {
-        val favoriteFood = FavoriteFood(id, foodName, foodImage)
+        val favoriteFood = FavoriteEntity(id, foodName, foodImage)
         withContext(Dispatchers.IO) {
             dao.saveFoodToFavorite(favoriteFood)
         }
     }
 
     suspend fun deleteFoodFromFavorite(id: Int) {
-        val favoriteFood = FavoriteFood(id, "", "")
+        val favoriteFood = FavoriteEntity(id, "", "")
         withContext(Dispatchers.IO) {
             dao.deleteFoodFromFavorite(favoriteFood)
         }

@@ -2,10 +2,12 @@ package com.selin.fooddeliveryapp.ui.home
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewHomeCardBinding
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
+import com.selin.fooddeliveryapp.utils.extension.Size
+import com.selin.fooddeliveryapp.utils.extension.loadImage
 
 class FoodViewHolder(
     val binding: ItemViewHomeCardBinding,
@@ -39,10 +41,7 @@ class FoodViewHolder(
     }
 
     private fun loadImage(context: Context, food: FoodResponse) {
-        val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${food.imageName}"
-        Glide.with(context)
-            .load(imageUrl)
-            .override(300, 300)
-            .into(binding.ivFoodImage)
+        val imageUrl = "${AppConstants.BASE_IMAGE_URL}${food.imageName}"
+        binding.ivFoodImage.loadImage(imageUrl, size = Size(300, 300))
     }
 }
