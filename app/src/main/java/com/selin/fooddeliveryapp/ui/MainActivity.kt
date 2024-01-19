@@ -1,8 +1,7 @@
 package com.selin.fooddeliveryapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isGone
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -44,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.isVisible = when (destination.id) {
             R.id.homepageFragment, R.id.cartFragment, R.id.favoriteFragment ->
                 true
+
             else -> false
         }
     }

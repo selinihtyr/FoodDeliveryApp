@@ -104,5 +104,8 @@ dependencies {
 
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
+    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+
 
 }

@@ -1,10 +1,12 @@
 package com.selin.fooddeliveryapp.data.repo
 
 import com.selin.fooddeliveryapp.data.model.entity.FavoriteEntity
+import com.selin.fooddeliveryapp.data.model.entity.toFood
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.data.source.remote.FoodApi
 import com.selin.fooddeliveryapp.data.source.locale.FavoriteDao
+import com.selin.fooddeliveryapp.domain.FavoriteFood
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -42,8 +44,8 @@ class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
         service.deleteFoodFromCart(cartFoodId, username)
     }
 
-    fun getFoodToFavorite(): List<FavoriteEntity> {
-        return dao.getFoodToFavorite()
+    fun getFoodToFavorite(): List<FavoriteFood> {
+        return dao.getFoodToFavorite().map { entity -> entity.toFood() }
     }
 
     suspend fun saveFoodToFavorite(id: Int, foodName: String, foodImage: String) {

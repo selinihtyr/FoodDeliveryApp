@@ -54,7 +54,7 @@ class DetailViewModel @Inject constructor(private val repo: FoodRepo) : ViewMode
 
     fun saveFoodToFavorite(id: Int, name:String, imageUrl: String) {
         viewModelScope.launch {
-            repo.saveFoodToFavorite(id, name, imageUrl)
+            repo.saveFoodToFavorite(id, name, imageUrl, )
         }
     }
     fun deleteFoodFromFavorite(food: FoodResponse) {

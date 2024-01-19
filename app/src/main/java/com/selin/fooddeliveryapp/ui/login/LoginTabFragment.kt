@@ -1,4 +1,4 @@
-package com.selin.fooddeliveryapp.ui
+package com.selin.fooddeliveryapp.ui.login
 
 import android.os.Bundle
 import android.view.LayoutInflater

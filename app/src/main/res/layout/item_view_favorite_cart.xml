@@ -1,70 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#00FFFFFF">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardDesignHome"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/ibDontLike"
+        android:layout_width="35dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFoodImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tvFoodName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="#FFFFFF"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="6dp">
+        android:gravity="center|center_horizontal"
+        android:text="@string/food_name"
+        android:textAlignment="center"
+        android:textColor="#494848"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivFoodImage"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/ibDontLike"
-            android:layout_width="35dp"
-            android:layout_height="36dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/close" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewFoodImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="start"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="90dp"
-            app:cardElevation="2dp">
-
-            <ImageView
-                android:id="@+id/ivFoodImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvFoodName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center|center_horizontal"
-            android:text="@string/food_name"
-            android:textAlignment="center"
-            android:textColor="#494848"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="75dp"
-            android:gravity="center|center_horizontal"
-            android:text="@string/total_price"
-            android:textColor="#333233"
-            android:textSize="24sp" />
-
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

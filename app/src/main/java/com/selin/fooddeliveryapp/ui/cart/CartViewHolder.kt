@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.databinding.ItemViewCartCardBinding
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import com.selin.fooddeliveryapp.utils.extension.Size
 import com.selin.fooddeliveryapp.utils.extension.loadImage
 
@@ -26,7 +27,7 @@ class CartViewHolder(
     }
 
     private fun loadImage(cart: FoodCartResponse) {
-        val imageUrl = "http://kasimadalan.pe.hu/yemekler/resimler/${cart.imageName}"
+        val imageUrl = "${AppConstants.BASE_IMAGE_URL}${cart.imageName}"
         binding.ivFoodImage.loadImage(imageUrl = imageUrl, size = Size(100, 100))
     }
 }

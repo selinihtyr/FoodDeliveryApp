@@ -40,7 +40,11 @@ class SignUpFragment : Fragment() {
             val password = etInPassword.text.toString()
             val confirmPassword = editTextTextPassword2.text.toString()
 
-            viewModel.signUp(email, password, confirmPassword)
+            viewModel.signUp(
+                email = email,
+                password = password,
+                confirmPassword = confirmPassword
+            )
         }
     }
 

@@ -87,7 +87,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun displayFoodDetails(food: FoodResponse) = with(binding) {
-        val photo = "http://kasimadalan.pe.hu/yemekler/resimler/${food.imageName}"
+        val photo = "${AppConstants.BASE_IMAGE_URL}${food.imageName}"
         binding.ivFoodImage.loadImage(imageUrl = photo)
         tvFoodName.text = food.name
         val quantityText = viewModel.quantityText.value ?: 1

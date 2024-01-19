@@ -24,25 +24,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomePageFragment : Fragment() {
     private lateinit var binding: FragmentHomepageBinding
-    private lateinit var adapter: FoodAdapter
     private val viewModel: FoodViewModel by viewModels()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomepageBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initVariables()
-        initViews()
-        observe()
-    }
-
-    private fun initVariables() {
-        adapter = FoodAdapter(
+    private val adapter: FoodAdapter by lazy {
+        FoodAdapter(
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
                 override fun onClickDetail(food: FoodResponse) {
@@ -55,6 +39,19 @@ class HomePageFragment : Fragment() {
                 }
             }
         )
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentHomepageBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        observe()
     }
 
     private fun initViews() = with(binding) {

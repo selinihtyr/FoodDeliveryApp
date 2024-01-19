@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginTabFragment"
-        android:name="com.selin.fooddeliveryapp.ui.LoginTabFragment"
+        android:name="com.selin.fooddeliveryapp.ui.login.LoginTabFragment"
         android:label="LoginTabFragment" />
 
 </navigation>

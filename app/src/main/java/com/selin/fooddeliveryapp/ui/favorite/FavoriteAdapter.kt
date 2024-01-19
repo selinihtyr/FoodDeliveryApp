@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.selin.fooddeliveryapp.data.model.entity.FavoriteEntity
 import com.selin.fooddeliveryapp.databinding.ItemViewFavoriteCartBinding
+import com.selin.fooddeliveryapp.domain.FavoriteFood
 
 class FavoriteAdapter(
-    private var favoriteFoods: List<FavoriteEntity>,
+    private var favoriteFoods: List<FavoriteFood>,
     private val foodCallbacks: FavoriteCallback
-) : ListAdapter<FavoriteEntity, FavoriteViewHolder>(FavoriteDiffUtil()) {
+) : ListAdapter<FavoriteFood, FavoriteViewHolder>(FavoriteDiffUtil()) {
 
     interface FavoriteCallback {
-        fun onClickDelete(favoriteFood: FavoriteEntity)
+        fun onClickDelete(favoriteFood: FavoriteFood)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -29,17 +29,17 @@ class FavoriteAdapter(
 
     override fun getItemCount(): Int = favoriteFoods.size
 
-    class FavoriteDiffUtil : DiffUtil.ItemCallback<FavoriteEntity>() {
-        override fun areItemsTheSame(oldItem: FavoriteEntity, newItem: FavoriteEntity): Boolean {
+    class FavoriteDiffUtil : DiffUtil.ItemCallback<FavoriteFood>() {
+        override fun areItemsTheSame(oldItem: FavoriteFood, newItem: FavoriteFood): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: FavoriteEntity, newItem: FavoriteEntity): Boolean {
+        override fun areContentsTheSame(oldItem: FavoriteFood, newItem: FavoriteFood): Boolean {
             return oldItem == newItem
         }
     }
 
-    fun updateData(newData: List<FavoriteEntity>) {
+    fun updateData(newData: List<FavoriteFood>) {
         favoriteFoods = newData
         notifyDataSetChanged()
     }
