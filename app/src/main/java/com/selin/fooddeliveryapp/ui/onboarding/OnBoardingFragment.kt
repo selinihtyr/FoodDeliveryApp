@@ -38,7 +38,9 @@ class OnBoardingFragment : Fragment() {
             lifecycle
         )
 
-        binding.viewPager.adapter = adapter
-        binding.dotsIndicator.attachTo(binding.viewPager)
+        with(binding) {
+            viewPager.adapter = adapter
+            dotsIndicator.attachTo(viewPager)
+        }
     }
 }

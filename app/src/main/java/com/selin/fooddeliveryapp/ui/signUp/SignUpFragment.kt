@@ -49,7 +49,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun observe() {
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch {
             viewModel.error.collect { error: SignUpError ->
                 val stringResourceId = SignUpError.toStringResource(error)
                 Snackbar.make(requireView(), stringResourceId, Snackbar.LENGTH_SHORT).show()
@@ -57,5 +57,3 @@ class SignUpFragment : Fragment() {
         }
     }
 }
-
-

@@ -30,18 +30,20 @@ class SplashFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.startSplash()
-        viewModel.checkUserInfo()
-        viewModel.liveSplashCompleted.observe(viewLifecycleOwner) { completed ->
-            if (completed) {
-                val destination = viewModel.navigateToDestination(onBoardingFinished())
-                findNavController().navigate(destination)
+        with(viewModel){
+            startSplash()
+            checkUserInfo()
+            liveSplashCompleted.observe(viewLifecycleOwner) { completed ->
+                if (completed) {
+                    val destination = navigateToDestination(onBoardingFinished())
+                    findNavController().navigate(destination)
+                }
             }
         }
     }
 
     private fun onBoardingFinished(): Boolean {
-        val sharedPref = activity?.getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        return sharedPref?.getBoolean("Finished", false) ?: false
+        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("Finished", false)
     }
 }

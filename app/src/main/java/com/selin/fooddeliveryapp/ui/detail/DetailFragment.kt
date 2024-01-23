@@ -43,7 +43,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun initVariables() {
-        food = requireArguments().getParcelable(KEY_FOOD)!!
+        food = requireArguments().getParcelable(AppConstants.KEY_FOOD)!!
     }
 
     private fun initViews() = with(binding) {
@@ -65,24 +65,26 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun observe() = with(binding) {
-        chipAddCart.setOnClickListener { addToCart() }
-        chipMinus.setOnClickListener { viewModel.decreaseOrderQuantity() }
-        chipPlus.setOnClickListener { viewModel.increaseOrderQuantity() }
-        tvPrice.text = getString(R.string.price, tvPrice.text.toString())
-        tvQuantity.text = "${viewModel.quantity.value}"
+    private fun observe() {
+        binding.apply {
+            chipAddCart.setOnClickListener { addToCart() }
+            chipMinus.setOnClickListener { viewModel.decreaseOrderQuantity() }
+            chipPlus.setOnClickListener { viewModel.increaseOrderQuantity() }
+            tvPrice.text = getString(R.string.price, tvPrice.text.toString())
+            tvQuantity.text = "${viewModel.quantity.value}"
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.message.collect {
-                Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+            lifecycleScope.launchWhenStarted {
+                viewModel.message.collect {
+                    Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                }
             }
-        }
 
-        viewModel.quantity.observe(viewLifecycleOwner) { newQuantity ->
-            tvQuantity.text = "$newQuantity"
-            val quantityText = viewModel.quantityText.value ?: 1
-            val totalPrice = food.price.toSafeInt() * newQuantity * quantityText
-            tvPrice.text = getString(R.string.price, totalPrice.toString())
+            viewModel.quantity.observe(viewLifecycleOwner) { newQuantity ->
+                tvQuantity.text = "$newQuantity"
+                val quantityText = viewModel.quantityText.value ?: 1
+                val totalPrice = food.price.toSafeInt() * newQuantity * quantityText
+                tvPrice.text = getString(R.string.price, totalPrice.toString())
+            }
         }
     }
 
@@ -103,9 +105,5 @@ class DetailFragment : Fragment() {
             username = AppConstants.USERNAME
         )
         findNavController().navigate(R.id.detailFragment_to_cartFragment)
-    }
-
-    companion object {
-        const val KEY_FOOD = "key_food"
     }
 }

@@ -26,8 +26,8 @@ class EndFragment : Fragment() {
 
     private fun observe() {
         viewModel.startSplash()
-        viewModel.endCompleted.observe(viewLifecycleOwner) {
-            if (it) {
+        viewModel.endCompleted.observe(viewLifecycleOwner) {completed ->
+            if (completed) {
                 Handler().postDelayed({
                     activity?.finish()
                 }, 5000)

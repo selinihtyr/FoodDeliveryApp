@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -14,6 +15,7 @@ import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodCartResponse
 import com.selin.fooddeliveryapp.databinding.FragmentCartBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CartFragment : Fragment() {
@@ -55,7 +57,9 @@ class CartFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                findNavController().navigate(R.id.transitationEnd)
+                lifecycleScope.launch {
+                    findNavController().navigate(R.id.transitationEnd)
+                }
             }
         }
 
@@ -72,6 +76,8 @@ class CartFragment : Fragment() {
                 StaggeredGridLayoutManager.VERTICAL
             )
         )
+
+
     }
 
     private fun observe() {
@@ -82,7 +88,8 @@ class CartFragment : Fragment() {
         viewModel.totalPrice.observe(viewLifecycleOwner) { totalPrice ->
             binding.tvTotalPrice.text = getString(R.string.total_price, totalPrice)
         }
-
-        viewModel.getCartList()
+        lifecycleScope.launch {
+            viewModel.getCartList()
+        }
     }
 }

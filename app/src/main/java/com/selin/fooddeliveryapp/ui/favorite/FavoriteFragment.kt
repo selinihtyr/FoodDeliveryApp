@@ -45,14 +45,14 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun initVariables() {
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvFavorite.layoutManager = layoutManager
-        binding.rvFavorite.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                layoutManager.orientation
+        with(binding.rvFavorite) {
+            val layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(), layoutManager.orientation
+                )
             )
-        )
+        }
     }
 
     private fun initView() = with(binding) {
