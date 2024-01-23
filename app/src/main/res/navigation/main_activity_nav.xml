@@ -28,6 +28,12 @@
         <action
             android:id="@+id/home_to_login"
             app:destination="@id/loginTabFragment" />
+        <action
+            android:id="@+id/settingFr"
+            app:destination="@id/home_to_settings" />
+        <action
+            android:id="@+id/home_to_about"
+            app:destination="@id/aboutFragment" />
     </fragment>
 
     <fragment
@@ -94,5 +100,56 @@
         android:id="@+id/loginTabFragment"
         android:name="com.selin.fooddeliveryapp.ui.login.LoginTabFragment"
         android:label="LoginTabFragment" />
+    <fragment
+        android:id="@+id/home_to_settings"
+        android:name="com.selin.fooddeliveryapp.ui.menu.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/settings_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/settings_to_notification"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/settings_to_language"
+            app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/settings_to_policy"
+            app:destination="@id/policyFragment" />
+        <action
+            android:id="@+id/settings_to_feedback"
+            app:destination="@id/feedbackFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.selin.fooddeliveryapp.ui.menu.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.selin.fooddeliveryapp.ui.settings.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/feedbackFormFragment"
+        android:name="com.selin.fooddeliveryapp.ui.settings.FeedbackFormFragment"
+        android:label="fragment_feedback_form"
+        tools:layout="@layout/fragment_feedback_form" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.selin.fooddeliveryapp.ui.settings.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.selin.fooddeliveryapp.ui.settings.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/policyFragment"
+        android:name="com.selin.fooddeliveryapp.ui.settings.PolicyFragment"
+        android:label="fragment_policy"
+        tools:layout="@layout/fragment_policy" />
 
 </navigation>

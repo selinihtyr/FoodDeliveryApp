@@ -11,12 +11,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
-import com.selin.fooddeliveryapp.ui.detail.DetailFragment
+import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ class HomePageFragment : Fragment() {
             foods = mutableListOf(),
             foodCallbacks = object : FoodAdapter.FoodCallback {
                 override fun onClickDetail(food: FoodResponse) {
-                    val bundle = Bundle().apply { putParcelable(DetailFragment.KEY_FOOD, food) }
+                    val bundle = Bundle().apply { putParcelable(AppConstants.KEY_FOOD, food) }
                     findNavController().navigate(R.id.action_home_to_detail, bundle)
                 }
 
@@ -40,6 +41,7 @@ class HomePageFragment : Fragment() {
             }
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,15 +58,29 @@ class HomePageFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         ibMap.setOnClickListener { navigateToMapFragment() }
-        ibLogout.setOnClickListener {
-            viewModel.onLogoutClicked()
-        }
         etSearch.addTextChangedListener {
             viewModel.searchFoods(it.toString())
         }
         rvHome.layoutManager =
             StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         rvHome.adapter = adapter
+        ibMenu.setOnClickListener {
+            drawerLayout.openDrawer(binding.navigationDrawer)
+        }
+        navigationDrawer.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menuSetting -> {
+                    Navigation.findNavController(requireView()).navigate(R.id.home_to_settings)
+                }
+                R.id.menuAbout -> {
+                    Navigation.findNavController(requireView()).navigate(R.id.home_to_about)
+                }
+                R.id.menuLogout -> {
+                    viewModel.onLogoutClicked()
+                }
+            }
+            true
+        }
     }
 
     private fun observe() {
