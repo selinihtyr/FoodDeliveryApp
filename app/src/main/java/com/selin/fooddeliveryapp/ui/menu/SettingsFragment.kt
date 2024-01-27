@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.selin.fooddeliveryapp.databinding.FragmentSettingsBinding
-import com.selin.fooddeliveryapp.ui.SharedViewModel
+import com.selin.fooddeliveryapp.ui.shared.SharedViewModel
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
@@ -35,12 +36,29 @@ class SettingsFragment : Fragment() {
                 val editText = EditText(context)
                 val dialog = AlertDialog.Builder(context)
                     .setTitle("Change Name")
-                    .setMessage("Enter new name")
                     .setView(editText)
                     .setPositiveButton("OK") { _, _ ->
                         val newName = editText.text.toString()
-                        userNameTextView.text = newName
                         sharedViewModel.saveUserName(newName)
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .create()
+                dialog.show()
+            }
+
+            ivMailArrow.setOnClickListener {
+                val editText = EditText(context)
+                val dialog = AlertDialog.Builder(context)
+                    .setTitle("Change Mail")
+                    .setView(editText)
+                    .setPositiveButton("OK") { _, _ ->
+                        val newMail = editText.text.toString()
+                        if (android.util.Patterns.EMAIL_ADDRESS.matcher(newMail).matches()) {
+                            sharedViewModel.saveMail(newMail)
+                        }
+                        else {
+                            Toast.makeText(context, "Invalid mail address", Toast.LENGTH_SHORT).show()
+                        }
                     }
                     .setNegativeButton("Cancel", null)
                     .create()

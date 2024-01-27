@@ -63,16 +63,6 @@
                     android:layout_marginTop="60dp"
                     app:srcCompat="@drawable/edit_name" />
 
-                <ImageView
-                    android:id="@+id/ivNameArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginEnd="16dp"
-                    android:clickable="true"
-                    app:srcCompat="@drawable/arrow_right" />
-
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
@@ -83,15 +73,34 @@
                     android:textSize="20sp" />
 
                 <ImageView
-                    android:id="@+id/ivPhoto"
+                    android:id="@+id/ivNameArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/arrow_right" />
+
+                <ImageView
+                    android:id="@+id/ivMail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="110dp"
-                    app:srcCompat="@drawable/image_search" />
+                    app:srcCompat="@drawable/mail" />
+
+                <TextView
+                    android:id="@+id/tvMail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="110dp"
+                    android:text="@string/mail"
+                    android:textSize="20sp" />
 
                 <ImageView
-                    android:id="@+id/ivPhotoArrow"
+                    android:id="@+id/ivMailArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -100,32 +109,50 @@
                     android:clickable="true"
                     app:srcCompat="@drawable/arrow_right" />
 
+                <ImageView
+                    android:id="@+id/ivPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="160dp"
+                    app:srcCompat="@drawable/image_search" />
 
                 <TextView
                     android:id="@+id/tvPhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="60dp"
-                    android:layout_marginTop="115dp"
+                    android:layout_marginTop="165dp"
                     android:text="@string/photo"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tvPassword"
+                <ImageView
+                    android:id="@+id/ivPhotoArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="165dp"
-                    android:text="@string/password"
-                    android:textSize="20sp" />
+                    android:layout_gravity="end"
+                    android:layout_marginTop="160dp"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/arrow_right" />
+
 
                 <ImageView
                     android:id="@+id/ivPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginTop="210dp"
                     app:srcCompat="@drawable/password" />
+
+                <TextView
+                    android:id="@+id/tvPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="215dp"
+                    android:text="@string/password"
+                    android:textSize="20sp" />
 
 
                 <ImageView
@@ -133,7 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginTop="210dp"
                     android:layout_marginEnd="16dp"
                     android:clickable="true"
                     app:srcCompat="@drawable/arrow_right" />

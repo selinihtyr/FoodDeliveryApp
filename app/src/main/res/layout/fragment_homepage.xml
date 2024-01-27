@@ -87,11 +87,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="#00FFFFFF"
+            android:contentDescription="@string/todo"
             app:layout_constraintBottom_toTopOf="@+id/tvDeliciousFoodForYou"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logout"
-            android:contentDescription="@string/todo" />
+            app:srcCompat="@drawable/menu" />
 
         <ProgressBar
             android:id="@+id/progressBar"

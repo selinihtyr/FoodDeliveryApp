@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
-import com.selin.fooddeliveryapp.ui.SharedViewModel
+import com.selin.fooddeliveryapp.ui.shared.SharedViewModel
 import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -62,11 +62,18 @@ class HomePageFragment : Fragment() {
         val navigationView = binding.navigationDrawer
         val headerView = navigationView.getHeaderView(0)
         val userNameTextView: TextView = headerView.findViewById(R.id.etUserName)
+        val mailTextView: TextView = headerView.findViewById(R.id.tvUserMail)
 
         sharedViewModel.loadUserName()
 
         sharedViewModel.userName.observe(viewLifecycleOwner) { userName ->
             userNameTextView.text = userName
+        }
+
+        sharedViewModel.loadMail()
+
+        sharedViewModel.mail.observe(viewLifecycleOwner) { mail ->
+            mailTextView.text = mail
         }
 
     }
