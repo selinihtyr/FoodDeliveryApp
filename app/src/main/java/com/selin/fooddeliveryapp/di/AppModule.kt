@@ -22,14 +22,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
-    @Provides
-    @Singleton
+    @[Provides Singleton]
     fun provideFoodRepository(service: FoodApi, favoriteDao: FavoriteDao): FoodRepo {
         return FoodRepo(service, favoriteDao)
     }
 
-    @Provides
-    @Singleton
+    @[Provides Singleton]
     fun provideFood(): FoodApi {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -46,8 +44,7 @@ class AppModule {
             .create(FoodApi::class.java)
     }
 
-    @Provides
-    @Singleton
+    @[Provides Singleton]
     fun provideFavoriteDao(@ApplicationContext context: Context): FavoriteDao {
         return Room.databaseBuilder(context, Database::class.java, "favorites")
             .build()

@@ -1,6 +1,7 @@
 package com.selin.fooddeliveryapp.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
@@ -14,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: SharedViewModel by viewModels()
 
     private val navHostFragment: NavHostFragment by lazy {
         supportFragmentManager.findFragmentById(R.id.splashFragmentContainerView) as NavHostFragment
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             handleBottomNavigationVisibility(destination)
         }
+
+        viewModel.loadUserName()
     }
 
     private fun setupBottomNavigation() {

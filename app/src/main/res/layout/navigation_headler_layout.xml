@@ -22,7 +22,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="#00FFFFFF"
-        android:text="Selin İhtiyar"
+        android:text="@string/selin_htiyar"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="selin@gmail.com"
+        android:text="@string/selin_gmail_com"
         app:layout_constraintStart_toEndOf="@+id/ivProfilePicture"
         app:layout_constraintTop_toBottomOf="@+id/etUserName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

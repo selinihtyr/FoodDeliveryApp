@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
+import com.selin.fooddeliveryapp.ui.SharedViewModel
 import com.selin.fooddeliveryapp.utils.constans.AppConstants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -26,6 +29,7 @@ import kotlinx.coroutines.launch
 class HomePageFragment : Fragment() {
     private lateinit var binding: FragmentHomepageBinding
     private val viewModel: FoodViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val adapter: FoodAdapter by lazy {
         FoodAdapter(
             foods = mutableListOf(),
@@ -54,6 +58,17 @@ class HomePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observe()
+
+        val navigationView = binding.navigationDrawer
+        val headerView = navigationView.getHeaderView(0)
+        val userNameTextView: TextView = headerView.findViewById(R.id.etUserName)
+
+        sharedViewModel.loadUserName()
+
+        sharedViewModel.userName.observe(viewLifecycleOwner) { userName ->
+            userNameTextView.text = userName
+        }
+
     }
 
     private fun initViews() = with(binding) {
@@ -72,9 +87,11 @@ class HomePageFragment : Fragment() {
                 R.id.menuSetting -> {
                     Navigation.findNavController(requireView()).navigate(R.id.home_to_settings)
                 }
+
                 R.id.menuAbout -> {
                     Navigation.findNavController(requireView()).navigate(R.id.home_to_about)
                 }
+
                 R.id.menuLogout -> {
                     viewModel.onLogoutClicked()
                 }

@@ -45,6 +45,22 @@
     <string name="finish">Finish</string>
     <string name="welcome_to_food_delivery">Welcome to Food Delivery</string>
     <string name="forget_password">Forget Password</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="delicious_food_for_you">Delicious food for you</string>
+    <string name="todo">TODO</string>
+    <string name="profile">Profile</string>
+    <string name="notification">Notification</string>
+    <string name="language">Language</string>
+    <string name="account">Account</string>
+    <string name="privacy_policy_and_terms_of_use">Privacy policy and terms of use</string>
+    <string name="feedback_form">Feedback form</string>
+    <string name="photo">Photo</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="selin_htiyar">Selin İhtiyar</string>
+    <string name="selin_gmail_com">selin@gmail.com</string>
 
 
 </resources>

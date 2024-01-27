@@ -10,7 +10,7 @@ import com.selin.fooddeliveryapp.domain.FavoriteFood
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
+class FoodRepo(private val service: FoodApi, private val favoriteDao: FavoriteDao) {
     suspend fun getAllFoods(): List<FoodResponse> = withContext(Dispatchers.IO) {
         return@withContext service.getAllFoods().foods
     }
@@ -45,20 +45,20 @@ class FoodRepo(private val service: FoodApi, private val dao: FavoriteDao) {
     }
 
     fun getFoodToFavorite(): List<FavoriteFood> {
-        return dao.getFoodToFavorite().map { entity -> entity.toFood() }
+        return favoriteDao.getFoodToFavorite().map { entity -> entity.toFood() }
     }
 
     suspend fun saveFoodToFavorite(id: Int, foodName: String, foodImage: String) {
         val favoriteFood = FavoriteEntity(id, foodName, foodImage)
         withContext(Dispatchers.IO) {
-            dao.saveFoodToFavorite(favoriteFood)
+            favoriteDao.saveFoodToFavorite(favoriteFood)
         }
     }
 
     suspend fun deleteFoodFromFavorite(id: Int) {
         val favoriteFood = FavoriteEntity(id, "", "")
         withContext(Dispatchers.IO) {
-            dao.deleteFoodFromFavorite(favoriteFood)
+            favoriteDao.deleteFoodFromFavorite(favoriteFood)
         }
     }
 }
