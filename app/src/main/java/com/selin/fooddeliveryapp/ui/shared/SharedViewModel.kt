@@ -10,6 +10,7 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor (application: Application) : ViewModel() {
     val userName: MutableLiveData<String> = MutableLiveData()
     val mail: MutableLiveData<String> = MutableLiveData()
+    val photo: MutableLiveData<String> = MutableLiveData()
     private val sharedPrefHelper = SharedPrefHelper(application)
 
     fun saveUserName(userName: String) {
@@ -32,6 +33,17 @@ class SharedViewModel @Inject constructor (application: Application) : ViewModel
         val mail = sharedPrefHelper.getMail()
         if (mail != null) {
             this.mail.value = mail
+        }
+    }
+
+    fun savePhoto(photo: String) {
+        sharedPrefHelper.savePhoto(photo)
+    }
+
+    fun loadPhoto() {
+        val photo = sharedPrefHelper.getPhoto()
+        if (photo != null) {
+            this.photo.value = photo
         }
     }
 }

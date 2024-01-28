@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
@@ -16,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
 import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.data.model.response.FoodResponse
 import com.selin.fooddeliveryapp.databinding.FragmentHomepageBinding
@@ -61,6 +63,7 @@ class HomePageFragment : Fragment() {
 
         val navigationView = binding.navigationDrawer
         val headerView = navigationView.getHeaderView(0)
+        val headerPhoto = headerView.findViewById<ImageView>(R.id.ivProfilePicture)
         val userNameTextView: TextView = headerView.findViewById(R.id.etUserName)
         val mailTextView: TextView = headerView.findViewById(R.id.tvUserMail)
 
@@ -74,6 +77,16 @@ class HomePageFragment : Fragment() {
 
         sharedViewModel.mail.observe(viewLifecycleOwner) { mail ->
             mailTextView.text = mail
+        }
+
+        sharedViewModel.loadPhoto()
+
+        sharedViewModel.photo.observe(viewLifecycleOwner) { photo ->
+            if (photo != null) {
+                Glide.with(requireContext()).load(photo).into(headerPhoto)
+            } else {
+                headerPhoto.setImageResource(R.drawable.user_profile)
+            }
         }
 
     }

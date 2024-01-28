@@ -6,4 +6,5 @@ object AppConstants{
     const val BASE_IMAGE_URL = "${BASE_URL}yemekler/resimler/"
     const val NUM_PAGES = 2
     const val KEY_FOOD = "key_food"
+    const val REQUEST_CODE = 100
 }

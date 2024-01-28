@@ -25,4 +25,14 @@ class SharedPrefHelper(context: Context) {
     fun getMail(): String? {
         return sharedPreferences.getString("mail", null)
     }
+
+    fun savePhoto(photo: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("photo", photo)
+        editor.apply()
+    }
+
+    fun getPhoto(): String? {
+        return sharedPreferences.getString("photo", null)
+    }
 }
