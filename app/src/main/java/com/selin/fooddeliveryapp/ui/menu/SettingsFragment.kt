@@ -11,6 +11,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.selin.fooddeliveryapp.ui.shared.SharedViewModel
 import com.selin.fooddeliveryapp.utils.constans.AppConstants.REQUEST_CODE
@@ -79,9 +82,62 @@ class SettingsFragment : Fragment() {
                 intent.type = "image/*"
                 startActivityForResult(intent, REQUEST_CODE)
 
-                sharedViewModel.loadPhoto()
+
+                sharedViewModel.savePhoto(ivPhoto.toString())
+            }
+
+            ivPasswordArrow.setOnClickListener {
+                showPasswordChangeDialog()
             }
         }
+    }
+
+    private fun showPasswordChangeDialog() {
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_password_change, null)
+        val etOldPassword: EditText = dialogView.findViewById(R.id.etOldPassword)
+        val etNewPassword: EditText = dialogView.findViewById(R.id.etNewPassword)
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Change Password")
+            .setView(dialogView)
+            .setPositiveButton("Change") { _, _ ->
+                val oldPassword = etOldPassword.text.toString()
+                val newPassword = etNewPassword.text.toString()
+
+                val user = FirebaseAuth.getInstance().currentUser
+                val credential = EmailAuthProvider.getCredential(user?.email!!, oldPassword)
+                user.reauthenticate(credential).addOnCompleteListener { reauthTask ->
+                    if (reauthTask.isSuccessful) {
+                        user.updatePassword(newPassword)
+                            .addOnCompleteListener { updatePasswordTask ->
+                                if (updatePasswordTask.isSuccessful) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Password changed successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Failed to change password",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Invalid old password",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        dialog.show()
     }
 
 }

@@ -1,6 +1,7 @@
 package com.selin.fooddeliveryapp.ui.home
 
 import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,35 +61,7 @@ class HomePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observe()
-
-        val navigationView = binding.navigationDrawer
-        val headerView = navigationView.getHeaderView(0)
-        val headerPhoto = headerView.findViewById<ImageView>(R.id.ivProfilePicture)
-        val userNameTextView: TextView = headerView.findViewById(R.id.etUserName)
-        val mailTextView: TextView = headerView.findViewById(R.id.tvUserMail)
-
-        sharedViewModel.loadUserName()
-
-        sharedViewModel.userName.observe(viewLifecycleOwner) { userName ->
-            userNameTextView.text = userName
-        }
-
-        sharedViewModel.loadMail()
-
-        sharedViewModel.mail.observe(viewLifecycleOwner) { mail ->
-            mailTextView.text = mail
-        }
-
-        sharedViewModel.loadPhoto()
-
-        sharedViewModel.photo.observe(viewLifecycleOwner) { photo ->
-            if (photo != null) {
-                Glide.with(requireContext()).load(photo).into(headerPhoto)
-            } else {
-                headerPhoto.setImageResource(R.drawable.user_profile)
-            }
-        }
-
+        observeSharedViewModel()
     }
 
     private fun initViews() = with(binding) {
@@ -136,6 +109,36 @@ class HomePageFragment : Fragment() {
             if (shouldShowDialog) {
                 showLogoutConfirmationDialog()
                 viewModel.onLogoutConfirmationShow()
+            }
+        }
+    }
+
+    private fun observeSharedViewModel() {
+        val navigationView = binding.navigationDrawer
+        val headerView = navigationView.getHeaderView(0)
+        val headerPhoto = headerView.findViewById<ImageView>(R.id.ivProfilePicture)
+        val userNameTextView: TextView = headerView.findViewById(R.id.etUserName)
+        val mailTextView: TextView = headerView.findViewById(R.id.tvUserMail)
+
+        sharedViewModel.loadUserName()
+
+        sharedViewModel.userName.observe(viewLifecycleOwner) { userName ->
+            userNameTextView.text = userName
+        }
+
+        sharedViewModel.loadMail()
+
+        sharedViewModel.mail.observe(viewLifecycleOwner) { mail ->
+            mailTextView.text = mail
+        }
+
+        sharedViewModel.loadPhoto()
+
+        sharedViewModel.photo.observe(viewLifecycleOwner) { photo ->
+            if (photo != null) {
+                Glide.with(requireContext()).load(Uri.parse(photo)).into(headerPhoto)
+            } else {
+                headerPhoto.setImageResource(R.drawable.user_profile)
             }
         }
     }

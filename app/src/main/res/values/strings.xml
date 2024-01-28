@@ -62,6 +62,8 @@
     <string name="selin_htiyar">Selin İhtiyar</string>
     <string name="selin_gmail_com">selin@gmail.com</string>
     <string name="mail">Mail</string>
+    <string name="enter_old_password">Enter old password</string>
+    <string name="enter_new_password">Enter new password</string>
 
 
 </resources>
