@@ -1,5 +1,6 @@
 package com.selin.fooddeliveryapp.ui.menu
 
+
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -16,10 +17,8 @@ import com.selin.fooddeliveryapp.R
 import com.selin.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.selin.fooddeliveryapp.ui.shared.SharedViewModel
 import com.selin.fooddeliveryapp.utils.constans.AppConstants
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class ProfileSettings: Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private val viewModel: SettingsViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()

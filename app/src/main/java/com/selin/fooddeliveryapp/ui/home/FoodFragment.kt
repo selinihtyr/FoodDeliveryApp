@@ -65,7 +65,7 @@ class HomePageFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
-        ibMap.setOnClickListener { navigateToMapFragment() }
+        ibMap.setOnClickListener { findNavController().navigate(R.id.mapFragment) }
         etSearch.addTextChangedListener {
             viewModel.searchFoods(it.toString())
         }
@@ -77,17 +77,9 @@ class HomePageFragment : Fragment() {
         }
         navigationDrawer.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menuSetting -> {
-                    Navigation.findNavController(requireView()).navigate(R.id.home_to_settings)
-                }
-
-                R.id.menuAbout -> {
-                    Navigation.findNavController(requireView()).navigate(R.id.home_to_about)
-                }
-
-                R.id.menuLogout -> {
-                    viewModel.onLogoutClicked()
-                }
+                R.id.menuSetting -> Navigation.findNavController(requireView()).navigate(R.id.home_to_settings)
+                R.id.menuAbout -> Navigation.findNavController(requireView()).navigate(R.id.home_to_about)
+                R.id.menuLogout -> viewModel.onLogoutClicked()
             }
             true
         }
@@ -160,9 +152,5 @@ class HomePageFragment : Fragment() {
 
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-    }
-
-    private fun navigateToMapFragment() {
-        findNavController().navigate(R.id.mapFragment)
     }
 }
